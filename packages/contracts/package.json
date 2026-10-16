@@ -23,6 +23,10 @@
     "./reviews": {
       "types": "./dist/reviews.d.ts",
       "default": "./dist/reviews.js"
+    },
+    "./ads": {
+      "types": "./dist/ads.d.ts",
+      "default": "./dist/ads.js"
     }
   },
   "scripts": {

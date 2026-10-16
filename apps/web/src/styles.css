@@ -2144,3 +2144,96 @@ nav a.active {
     grid-template-columns: 1fr;
   }
 }
+
+.ad-slot {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.ad-card {
+  display: grid;
+  grid-template-columns: minmax(96px, 160px) 1fr;
+  align-items: center;
+  min-height: 96px;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-primary);
+  text-align: left;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.ad-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.ad-card img {
+  width: 100%;
+  height: 96px;
+  object-fit: cover;
+}
+
+.ad-card span {
+  padding: 16px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.ad-slot-catalog_hero {
+  margin-top: -4px;
+}
+
+.ad-slot-catalog_hero .ad-card {
+  grid-template-columns: minmax(180px, 34%) 1fr;
+  min-height: 140px;
+}
+
+.ad-slot-catalog_hero .ad-card img {
+  height: 140px;
+}
+
+.summary-sidebar .ad-slot {
+  margin-top: 16px;
+}
+
+.summary-sidebar .ad-card {
+  grid-template-columns: 1fr;
+}
+
+.summary-sidebar .ad-card img {
+  height: 132px;
+}
+
+.ads-admin-header {
+  margin-top: 32px;
+}
+
+.ads-admin-grid {
+  align-items: start;
+}
+
+.ad-active-toggle {
+  justify-content: flex-start;
+}
+
+.admin-ad-row {
+  min-height: 96px;
+}
+
+@media (max-width: 600px) {
+  .ad-card,
+  .ad-slot-catalog_hero .ad-card {
+    grid-template-columns: 1fr;
+  }
+
+  .ad-card img,
+  .ad-slot-catalog_hero .ad-card img {
+    height: 160px;
+  }
+}

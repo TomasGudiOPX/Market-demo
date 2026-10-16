@@ -1,5 +1,6 @@
 import type { Order } from '@vps-template/contracts/orders';
 import { formatDate, money } from '../utils/formatters';
+import { AdSlot } from './AdSlot';
 
 interface OrdersViewProps {
   orders: Order[];
@@ -12,6 +13,8 @@ export function OrdersView({ orders }: OrdersViewProps) {
         <h1 className="panel-title">Order History</h1>
         <p className="orders-subtitle">View past transactions, item breakdowns, and order summaries.</p>
       </div>
+
+      <AdSlot placement="orders_summary" />
 
       {orders.length === 0 ? (
         <div className="empty-orders-state">

@@ -1,0 +1,20 @@
+candidate_id: 2026-08-05-cart-data-change
+collected_at: 2026-08-05
+evidence:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Working Rules + Validation
+    summary: Defines Prisma ownership, validation commands, and production-data constraints.
+    applies_to_section: [3, 5, 7]
+  - path: apps/api/prisma/schema.prisma
+    revision: 7c3d86d
+    locator: current schema
+    summary: Current Prisma schema source for migrations.
+    applies_to_section: [3, 4]
+rules_confirmed:
+  - rule: migrations live under apps/api/prisma/migrations
+    confirmed: true
+    source: AGENT.md@a8d6bbd
+  - rule: production data requires approval
+    confirmed: true
+    source: AGENT.md@a8d6bbd

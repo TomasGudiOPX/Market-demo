@@ -10,6 +10,10 @@ export function AdminApp() {
     adminForm,
     setAdminForm,
     editingProductId,
+    ads,
+    adForm,
+    setAdForm,
+    editingAdId,
     user,
     isAuthReady,
     toasts,
@@ -19,6 +23,10 @@ export function AdminApp() {
     retireProduct,
     startEditing,
     cancelEditing,
+    saveAd,
+    retireAd,
+    startEditingAd,
+    cancelEditingAd,
     logout,
   } = useCartState();
 
@@ -103,10 +111,18 @@ export function AdminApp() {
         adminForm={adminForm}
         setAdminForm={setAdminForm}
         editingProductId={editingProductId}
+        ads={ads}
+        adForm={adForm}
+        setAdForm={setAdForm}
+        editingAdId={editingAdId}
         onSaveProduct={saveProduct}
         onRetireProduct={retireProduct}
         onStartEditing={startEditing}
         onCancelEditing={cancelEditing}
+        onSaveAd={saveAd}
+        onRetireAd={retireAd}
+        onStartEditingAd={startEditingAd}
+        onCancelEditingAd={cancelEditingAd}
         isBusy={isBusy}
       />
     </div>

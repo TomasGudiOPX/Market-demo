@@ -1,0 +1,56 @@
+domain: data
+last_updated: 2026-08-06
+index_revision: 543efb6
+
+facts:
+  - id: data.reviews-table-schema
+    statement: "The Review table has columns id (UUID PK default gen_random_uuid), product_id (UUID FK -> products ON DELETE RESTRICT), user_id (UUID FK -> users ON DELETE CASCADE), rating (INTEGER with CHECK >= 1 AND <= 10), comment (VARCHAR(100) with CHECK length <= 100), created_at, updated_at; unique constraint on (product_id, user_id); index on (product_id, created_at)."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths:
+        - apps/api/prisma/schema.prisma
+        - apps/api/prisma/migrations/20260806120000_add_product_reviews/
+    source:
+      - path: apps/api/prisma/migrations/20260806120000_add_product_reviews/migration.sql
+        revision: "543efb6"
+        locator: "CREATE TABLE reviews"
+      - path: apps/api/prisma/schema.prisma
+        revision: "543efb6"
+        locator: "Review model"
+    confidence: explicit
+    owner: data
+    last_verified: 2026-08-06
+    promoted_from: data.reviews-table-schema
+    review_required: true
+    review_basis: explicit-user-request
+    approved_by: user
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []
+  - id: data.reviews-constraints-and-indexes
+    statement: "Reviews enforce one review per customer per product via UNIQUE(product_id, user_id); product FK uses ON DELETE RESTRICT to preserve reviews for retired products; user FK uses ON DELETE CASCADE; a composite index on (product_id, created_at) supports sorted public listing."
+    type: invariant
+    status: accepted
+    scope:
+      kind: module
+      paths:
+        - apps/api/prisma/schema.prisma
+    source:
+      - path: apps/api/prisma/schema.prisma
+        revision: "543efb6"
+        locator: "Review model"
+      - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+        revision: "543efb6"
+        locator: "Review data ownership"
+    confidence: corroborated
+    owner: data
+    last_verified: 2026-08-06
+    promoted_from: data.reviews-constraints-and-indexes
+    review_required: true
+    review_basis: explicit-user-request
+    approved_by: user
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []

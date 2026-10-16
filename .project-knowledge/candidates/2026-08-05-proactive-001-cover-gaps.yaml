@@ -1,0 +1,220 @@
+run_id: 2026-08-05-proactive-001-cover-gaps
+extracted_at: 2026-08-05
+bot_run_record: .project-knowledge/runs/2026-08-05-proactive-001-cover-gaps.md
+openspec_change: n/a
+
+candidates:
+  - id: architecture.module-auth-ownership
+    statement: "The auth module owns User credentials and identity; JWT and guards protect routes."
+    type: ownership
+    status: candidate
+    scope: { kind: module, paths: [apps/api/src/modules/auth/] }
+    source:
+      - { path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md, revision: working-tree-2026-08-05, locator: Auth }
+      - { path: AGENT.md, revision: working-tree-2026-08-05, locator: Architecture }
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/DESIGN.md, change: "Reverify auth module ownership." }
+  - id: architecture.module-products-ownership
+    statement: "The products module owns Product; catalog and detail are public while admin creates, updates, and logically retires products."
+    type: ownership
+    status: candidate
+    scope: { kind: module, paths: [apps/api/src/modules/products/] }
+    source:
+      - { path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md, revision: working-tree-2026-08-05, locator: Products }
+      - { path: AGENT.md, revision: working-tree-2026-08-05, locator: Architecture }
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/DESIGN.md, change: "Reverify products module ownership." }
+  - id: architecture.module-cart-ownership
+    statement: "The cart module owns the authenticated user's Cart and CartItem state."
+    type: ownership
+    status: candidate
+    scope: { kind: module, paths: [apps/api/src/modules/cart/] }
+    source:
+      - { path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md, revision: working-tree-2026-08-05, locator: Cart }
+      - { path: AGENT.md, revision: working-tree-2026-08-05, locator: Architecture }
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/DESIGN.md, change: "Reverify cart module ownership." }
+  - id: architecture.module-orders-ownership
+    statement: "The orders module owns Order, OrderItem, and checkout idempotency."
+    type: ownership
+    status: candidate
+    scope: { kind: module, paths: [apps/api/src/modules/orders/] }
+    source:
+      - { path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md, revision: working-tree-2026-08-05, locator: Orders }
+      - { path: AGENT.md, revision: working-tree-2026-08-05, locator: Architecture }
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/DESIGN.md, change: "Reverify orders module ownership." }
+  - id: architecture.module-projects-empty-scaffold
+    statement: "apps/api/src/modules/projects/ is an empty scaffold and is not an active business module."
+    type: observation
+    status: candidate
+    scope: { kind: module, paths: [apps/api/src/modules/projects/] }
+    source:
+      - { path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md, revision: working-tree-2026-08-05, locator: Projects }
+    confidence: explicit
+    owner: architecture
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md, change: "Document empty Projects scaffold." }
+  - id: contracts.admin-panel-dedicated-route
+    statement: "The administrator product-management console is exposed at /admin as a deep-linkable and refreshable dedicated route."
+    type: contract
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/admin-panel/spec.md, apps/web/] }
+    source:
+      - { path: openspec/specs/admin-panel/spec.md, revision: working-tree-2026-08-05, locator: "Admin console has a dedicated route" }
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/contracts.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: contracts.cart-checkout-orders-behavior
+    statement: "Cart, checkout, idempotency, stock safety, and order history behavior are governed by the cart-checkout-orders OpenSpec capability."
+    type: contract
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/cart-checkout-orders/spec.md, apps/api/src/modules/cart/, apps/api/src/modules/orders/] }
+    source:
+      - { path: openspec/specs/cart-checkout-orders/spec.md, revision: working-tree-2026-08-05, locator: "Cart, Checkout, and Orders Specification" }
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/contracts.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: contracts.product-catalog-admin-behavior
+    statement: "Product catalog and admin behavior includes public active catalog/detail, admin-only create/update/retire, logical retirement, and deterministic seed catalog."
+    type: contract
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/product-catalog-admin/spec.md, apps/api/src/modules/products/] }
+    source:
+      - { path: openspec/specs/product-catalog-admin/spec.md, revision: working-tree-2026-08-05, locator: "Product Catalog and Admin Specification" }
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/contracts.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: contracts.product-pagination-contract
+    statement: "GET /api/products accepts optional page and pageSize query parameters and returns pagination metadata with validated errors for invalid values."
+    type: contract
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/product-pagination/spec.md, apps/api/src/modules/products/] }
+    source:
+      - { path: openspec/specs/product-pagination/spec.md, revision: working-tree-2026-08-05, locator: "Paginated product listing" }
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/contracts.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: contracts.theme-mode-ui-behavior
+    statement: "The web UI supports light and dark themes with runtime toggles, persistence, and first-visit defaulting to the operating system color scheme."
+    type: contract
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/theme-mode/spec.md, apps/web/] }
+    source:
+      - { path: openspec/specs/theme-mode/spec.md, revision: working-tree-2026-08-05, locator: "Theme Mode" }
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/contracts.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: contracts.telegram-db-bridge-read-only-tools
+    statement: "The Telegram DB bridge exposes structured read-only MCP tools for list_tables, describe_table, and bounded select operations."
+    type: contract
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/telegram-db-bridge/spec.md] }
+    source:
+      - { path: openspec/specs/telegram-db-bridge/spec.md, revision: working-tree-2026-08-05, locator: "Structured read-only database tools" }
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/obsidian-vault/03 Evidencia/Evidencia - Telegram DB Bridge.md, change: "Link promoted Telegram bridge fact." }
+  - id: security.api-security-transport-hardening
+    statement: "The API sends standard security headers on every response and rate-limits per client IP with HTTP 429 structured errors when the limit is exceeded."
+    type: invariant
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/api-security/spec.md, apps/api/src/platform/] }
+    source:
+      - { path: openspec/specs/api-security/spec.md, revision: working-tree-2026-08-05, locator: "API Security" }
+    confidence: explicit
+    owner: security
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/security.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: security.identity-rbac-role-protection
+    statement: "Public registration creates customer users while administrator-only operations require an authenticated admin role."
+    type: invariant
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/identity-rbac/spec.md, apps/api/src/modules/auth/] }
+    source:
+      - { path: openspec/specs/identity-rbac/spec.md, revision: working-tree-2026-08-05, locator: "Identity and RBAC Specification" }
+    confidence: explicit
+    owner: security
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/security.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: security.telegram-db-bridge-access-control
+    statement: "The Telegram DB bridge requires valid bearer tokens, restricts Telegram access to allowed chats, bounds model-visible results, and sanitizes failure output."
+    type: invariant
+    status: candidate
+    scope: { kind: module, paths: [openspec/specs/telegram-db-bridge/spec.md] }
+    source:
+      - { path: openspec/specs/telegram-db-bridge/spec.md, revision: working-tree-2026-08-05, locator: "Tool access requires a valid bearer token" }
+    confidence: explicit
+    owner: security
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: docs/obsidian-vault/03 Evidencia/Evidencia - Telegram DB Bridge.md, change: "Link promoted Telegram bridge fact." }
+  - id: operations.deployment-environment-isolation
+    statement: "Local, staging, and production environments share source layout but isolate VPS deployments by checkout or worktree, .env, Compose project name, database credentials, PostgreSQL volume, and loopback port."
+    type: invariant
+    status: candidate
+    scope: { kind: environment, paths: [openspec/specs/deployment-environments.md] }
+    source:
+      - { path: openspec/specs/deployment-environments.md, revision: working-tree-2026-08-05, locator: "VPS Isolation" }
+    confidence: explicit
+    owner: operations
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/operations.yaml, change: "Accept fact citing OpenSpec spec." }
+  - id: delivery.docs-ci-ui-polish-traceability
+    statement: "Final delivery documentation must describe the actual Vite React, NestJS, PostgreSQL, Prisma, Docker Compose, GitHub workflow, Swagger, CI, and commerce module handoff consistently."
+    type: invariant
+    status: candidate
+    scope: { kind: repository, paths: [openspec/specs/delivery-docs-ci-polish/spec.md, docs/obsidian-vault/03 Evidencia/] }
+    source:
+      - { path: openspec/specs/delivery-docs-ci-polish/spec.md, revision: working-tree-2026-08-05, locator: "Honest delivery documentation" }
+    confidence: explicit
+    owner: delivery
+    last_verified: 2026-08-05
+    supersedes: []
+    proposed_document_update: { target: .project-knowledge/accepted/delivery.yaml, change: "Accept fact citing OpenSpec spec." }
+
+reconciliation:
+  - { id: architecture.module-auth-ownership, verdict: new, note: "No prior accepted fact existed." }
+  - { id: architecture.module-products-ownership, verdict: new, note: "No prior accepted fact existed." }
+  - { id: architecture.module-cart-ownership, verdict: new, note: "No prior accepted fact existed." }
+  - { id: architecture.module-orders-ownership, verdict: new, note: "No prior accepted fact existed." }
+  - { id: architecture.module-projects-empty-scaffold, verdict: new, note: "No prior accepted fact existed." }
+  - { id: contracts.admin-panel-dedicated-route, verdict: new, note: "No prior accepted fact existed." }
+  - { id: contracts.cart-checkout-orders-behavior, verdict: new, note: "No prior accepted fact existed." }
+  - { id: contracts.product-catalog-admin-behavior, verdict: new, note: "No prior accepted fact existed." }
+  - { id: contracts.product-pagination-contract, verdict: new, note: "No prior accepted fact existed." }
+  - { id: contracts.theme-mode-ui-behavior, verdict: new, note: "No prior accepted fact existed." }
+  - { id: contracts.telegram-db-bridge-read-only-tools, verdict: new, note: "No prior accepted fact existed." }
+  - { id: security.api-security-transport-hardening, verdict: new, note: "No prior accepted fact existed." }
+  - { id: security.identity-rbac-role-protection, verdict: new, note: "No prior accepted fact existed." }
+  - { id: security.telegram-db-bridge-access-control, verdict: new, note: "No prior accepted fact existed." }
+  - { id: operations.deployment-environment-isolation, verdict: new, note: "No prior accepted fact existed." }
+  - { id: delivery.docs-ci-ui-polish-traceability, verdict: new, note: "No prior accepted fact existed." }

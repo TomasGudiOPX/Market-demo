@@ -1,0 +1,169 @@
+facts:
+  - id: architecture.module-auth-ownership
+    owner: architecture
+    status: accepted
+    path: .project-knowledge/accepted/architecture.yaml
+    scope_paths: [apps/api/src/modules/auth/]
+    source_paths: [AGENT.md, docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md]
+    last_verified: 2026-08-05
+  - id: architecture.module-products-ownership
+    owner: architecture
+    status: accepted
+    path: .project-knowledge/accepted/architecture.yaml
+    scope_paths: [apps/api/src/modules/products/]
+    source_paths: [AGENT.md, docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md]
+    last_verified: 2026-08-05
+  - id: architecture.module-cart-ownership
+    owner: architecture
+    status: accepted
+    path: .project-knowledge/accepted/architecture.yaml
+    scope_paths: [apps/api/src/modules/cart/]
+    source_paths: [AGENT.md, docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md]
+    last_verified: 2026-08-05
+  - id: architecture.module-orders-ownership
+    owner: architecture
+    status: accepted
+    path: .project-knowledge/accepted/architecture.yaml
+    scope_paths: [apps/api/src/modules/orders/]
+    source_paths: [AGENT.md, docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md]
+    last_verified: 2026-08-05
+  - id: architecture.module-projects-empty-scaffold
+    owner: architecture
+    status: accepted
+    path: .project-knowledge/accepted/architecture.yaml
+    scope_paths: [apps/api/src/modules/projects/]
+    source_paths: [docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md]
+    last_verified: 2026-08-05
+  - id: architecture.module-reviews-ownership
+    owner: architecture
+    status: accepted
+    path: .project-knowledge/accepted/architecture.yaml
+    scope_paths: [apps/api/src/modules/reviews/, apps/api/src/app.ts]
+    source_paths: [apps/api/src/modules/reviews/review.module.ts, apps/api/src/app.ts, openspec/changes/add-product-reviews/proposal.md, docs/DESIGN.md]
+    last_verified: 2026-08-06
+  - id: contracts.admin-panel-dedicated-route
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [openspec/specs/admin-panel/spec.md, apps/web/]
+    source_paths: [openspec/specs/admin-panel/spec.md]
+    last_verified: 2026-08-05
+  - id: contracts.cart-checkout-orders-behavior
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [openspec/specs/cart-checkout-orders/spec.md, apps/api/src/modules/cart/, apps/api/src/modules/orders/]
+    source_paths: [openspec/specs/cart-checkout-orders/spec.md]
+    last_verified: 2026-08-05
+  - id: contracts.product-catalog-admin-behavior
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [openspec/specs/product-catalog-admin/spec.md, apps/api/src/modules/products/]
+    source_paths: [openspec/specs/product-catalog-admin/spec.md]
+    last_verified: 2026-08-05
+  - id: contracts.product-pagination-contract
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [openspec/specs/product-pagination/spec.md, apps/api/src/modules/products/]
+    source_paths: [openspec/specs/product-pagination/spec.md]
+    last_verified: 2026-08-05
+  - id: contracts.theme-mode-ui-behavior
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [openspec/specs/theme-mode/spec.md, apps/web/]
+    source_paths: [openspec/specs/theme-mode/spec.md]
+    last_verified: 2026-08-05
+  - id: contracts.telegram-db-bridge-read-only-tools
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [openspec/specs/telegram-db-bridge/spec.md]
+    source_paths: [openspec/specs/telegram-db-bridge/spec.md]
+    last_verified: 2026-08-05
+  - id: contracts.reviews-data-shapes
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [packages/contracts/src/reviews.ts]
+    source_paths: [packages/contracts/src/reviews.ts]
+    last_verified: 2026-08-06
+  - id: contracts.reviews-api-routes
+    owner: contracts
+    status: accepted
+    path: .project-knowledge/accepted/contracts.yaml
+    scope_paths: [apps/api/src/modules/reviews/review.controller.ts]
+    source_paths: [apps/api/src/modules/reviews/review.controller.ts, openspec/changes/add-product-reviews/specs/product-reviews/spec.md]
+    last_verified: 2026-08-06
+  - id: data.reviews-table-schema
+    owner: data
+    status: accepted
+    path: .project-knowledge/accepted/data.yaml
+    scope_paths: [apps/api/prisma/schema.prisma, apps/api/prisma/migrations/20260806120000_add_product_reviews/]
+    source_paths: [apps/api/prisma/migrations/20260806120000_add_product_reviews/migration.sql, apps/api/prisma/schema.prisma]
+    last_verified: 2026-08-06
+  - id: data.reviews-constraints-and-indexes
+    owner: data
+    status: accepted
+    path: .project-knowledge/accepted/data.yaml
+    scope_paths: [apps/api/prisma/schema.prisma]
+    source_paths: [apps/api/prisma/schema.prisma, openspec/changes/add-product-reviews/specs/product-reviews/spec.md]
+    last_verified: 2026-08-06
+  - id: security.api-security-transport-hardening
+    owner: security
+    status: accepted
+    path: .project-knowledge/accepted/security.yaml
+    scope_paths: [openspec/specs/api-security/spec.md, apps/api/src/platform/]
+    source_paths: [openspec/specs/api-security/spec.md]
+    last_verified: 2026-08-05
+  - id: security.identity-rbac-role-protection
+    owner: security
+    status: accepted
+    path: .project-knowledge/accepted/security.yaml
+    scope_paths: [openspec/specs/identity-rbac/spec.md, apps/api/src/modules/auth/]
+    source_paths: [openspec/specs/identity-rbac/spec.md]
+    last_verified: 2026-08-05
+  - id: security.telegram-db-bridge-access-control
+    owner: security
+    status: accepted
+    path: .project-knowledge/accepted/security.yaml
+    scope_paths: [openspec/specs/telegram-db-bridge/spec.md]
+    source_paths: [openspec/specs/telegram-db-bridge/spec.md]
+    last_verified: 2026-08-05
+  - id: operations.deployment-environment-isolation
+    owner: operations
+    status: accepted
+    path: .project-knowledge/accepted/operations.yaml
+    scope_paths: [openspec/specs/deployment-environments.md]
+    source_paths: [openspec/specs/deployment-environments.md]
+    last_verified: 2026-08-05
+  - id: delivery.docs-ci-ui-polish-traceability
+    owner: delivery
+    status: accepted
+    path: .project-knowledge/accepted/delivery.yaml
+    scope_paths: [openspec/specs/delivery-docs-ci-polish/spec.md, docs/obsidian-vault/03 Evidencia/]
+    source_paths: [openspec/specs/delivery-docs-ci-polish/spec.md]
+    last_verified: 2026-08-05
+  - id: delivery.reviews-fr09-requirement
+    owner: delivery
+    status: accepted
+    path: .project-knowledge/accepted/delivery.yaml
+    scope_paths: [docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md, openspec/changes/add-product-reviews/specs/product-reviews/spec.md]
+    source_paths: [docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md, openspec/changes/add-product-reviews/specs/product-reviews/spec.md]
+    last_verified: 2026-08-06
+  - id: delivery.reviews-vault-evidence-slice
+    owner: delivery
+    status: accepted
+    path: .project-knowledge/accepted/delivery.yaml
+    scope_paths: [docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md]
+    source_paths: [docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md]
+    last_verified: 2026-08-06
+  - id: delivery.reviews-ai-session
+    owner: delivery
+    status: accepted
+    path: .project-knowledge/accepted/delivery.yaml
+    scope_paths: [docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md, INFORME_IA.md]
+    source_paths: [docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md, INFORME_IA.md]
+    last_verified: 2026-08-06

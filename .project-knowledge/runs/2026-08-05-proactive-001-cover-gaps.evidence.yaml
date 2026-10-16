@@ -1,0 +1,66 @@
+run_id: 2026-08-05-proactive-001-cover-gaps
+collected_at: 2026-08-05T00:00:00Z
+sources:
+  - path: AGENT.md
+    revision: working-tree-2026-08-05
+    locator: Architecture
+    kind: owner-doc
+    status: M
+  - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+    revision: working-tree-2026-08-05
+    locator: Modulos de Dominio
+    kind: owner-doc
+    status: M
+  - path: openspec/specs/admin-panel/spec.md
+    revision: working-tree-2026-08-05
+    locator: Admin Panel
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/api-security/spec.md
+    revision: working-tree-2026-08-05
+    locator: API Security
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/cart-checkout-orders/spec.md
+    revision: working-tree-2026-08-05
+    locator: Cart, Checkout, and Orders Specification
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/delivery-docs-ci-polish/spec.md
+    revision: working-tree-2026-08-05
+    locator: Delivery Docs, CI, and UI Polish Specification
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/deployment-environments.md
+    revision: working-tree-2026-08-05
+    locator: Deployment Environments
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/identity-rbac/spec.md
+    revision: working-tree-2026-08-05
+    locator: Identity and RBAC Specification
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/product-catalog-admin/spec.md
+    revision: working-tree-2026-08-05
+    locator: Product Catalog and Admin Specification
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/product-pagination/spec.md
+    revision: working-tree-2026-08-05
+    locator: Product Pagination
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/telegram-db-bridge/spec.md
+    revision: working-tree-2026-08-05
+    locator: telegram-db-bridge Specification
+    kind: openspec-spec
+    status: M
+  - path: openspec/specs/theme-mode/spec.md
+    revision: working-tree-2026-08-05
+    locator: Theme Mode
+    kind: openspec-spec
+    status: M
+gaps:
+  - what: no-command-verification
+    reason: No validation commands were run in this documentation/fact-store pass.

@@ -1,0 +1,96 @@
+domain: delivery
+last_updated: 2026-08-05
+index_revision: working-tree-2026-08-05
+
+facts:
+  - id: delivery.docs-ci-ui-polish-traceability
+    statement: "Final delivery documentation must describe the actual Vite React, NestJS, PostgreSQL, Prisma, Docker Compose, GitHub workflow, Swagger, CI, and commerce module handoff consistently."
+    type: invariant
+    status: accepted
+    scope:
+      kind: repository
+      paths: [openspec/specs/delivery-docs-ci-polish/spec.md, docs/obsidian-vault/03 Evidencia/]
+    source:
+      - path: openspec/specs/delivery-docs-ci-polish/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Honest delivery documentation"
+    confidence: explicit
+    owner: delivery
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: delivery.reviews-fr09-requirement
+    statement: "FR-09 defines product reviews: visitors list reviews for active products unauthenticated; authenticated customers create one review per active product; customers update only their own review; products that are missing or retired reject review operations with REVIEW_PRODUCT_NOT_FOUND."
+    type: contract
+    status: accepted
+    scope:
+      kind: repository
+      paths:
+        - docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md
+        - openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+    source:
+      - path: docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md
+        revision: "543efb6"
+        locator: "FR-09 - Resenas de productos"
+      - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+        revision: "543efb6"
+        locator: "Product Reviews Specification"
+    confidence: corroborated
+    owner: delivery
+    last_verified: 2026-08-06
+    promoted_from: delivery.reviews-fr09-requirement
+    review_required: false
+    review_basis: automatic
+    approved_by: auto:2026-08-06-product-reviews-01
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []
+  - id: delivery.reviews-vault-evidence-slice
+    statement: "Evidence slice Evidencia - Product Reviews traces FR-09 with a complete Eslabon chain: requisitos (FR-09, NFR-01/02/03), OpenSpec (add-product-reviews), decision ('consumer' = authenticated customer), arquitectura (Modulos de Dominio), AI prompt (AI-2026-08-06-01), implementacion (contracts, prisma, module, app wiring), pruebas (Prisma validate, contracts build, API build, API tests OK 11 archivos 42 tests, yarn build OK)."
+    type: observation
+    status: accepted
+    scope:
+      kind: repository
+      paths:
+        - docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md
+    source:
+      - path: docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md
+        revision: "543efb6"
+        locator: "Evidencia - Product Reviews"
+    confidence: explicit
+    owner: delivery
+    last_verified: 2026-08-06
+    promoted_from: delivery.reviews-vault-evidence-slice
+    review_required: false
+    review_basis: automatic
+    approved_by: auto:2026-08-06-product-reviews-01
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []
+  - id: delivery.reviews-ai-session
+    statement: "AI session AI-2026-08-06-01 implemented product reviews via Codex using openspec-apply-change and local proj-bot/proj-bot-shared skills; human review confirmed 'consumer' means authenticated customer (not verified-purchase) to avoid order-history dependency; contract, model, migration, API, tests, and vault evidence all verified."
+    type: observation
+    status: accepted
+    scope:
+      kind: repository
+      paths:
+        - docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md
+        - INFORME_IA.md
+    source:
+      - path: docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md
+        revision: "543efb6"
+        locator: "AI-2026-08-06-01 - Product reviews"
+      - path: INFORME_IA.md
+        revision: "543efb6"
+        locator: "AI-2026-08-06-01 - Product reviews"
+    confidence: explicit
+    owner: delivery
+    last_verified: 2026-08-06
+    promoted_from: delivery.reviews-ai-session
+    review_required: false
+    review_basis: automatic
+    approved_by: auto:2026-08-06-product-reviews-01
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []

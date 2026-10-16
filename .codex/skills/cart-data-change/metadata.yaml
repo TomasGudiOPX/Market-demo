@@ -1,0 +1,40 @@
+id: cart-data-change
+version: 1.0.0
+scope: project
+status: active
+category: data-change
+owners:
+  - data
+  - operations
+  - delivery
+sources:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Working Rules + Validation
+  - path: docs/DEVELOPMENT.md
+    revision: 401f1be
+    locator: data-change workflow
+  - path: apps/api/prisma/schema.prisma
+    revision: 7c3d86d
+    locator: current schema
+  - path: apps/api/prisma/migrations
+    revision: 7c3d86d
+    locator: versioned migrations
+  - path: docs/VPS-DOC.md
+    revision: 401f1be
+    locator: backups and recovery
+  - path: docs/ENVIRONMENTS.md
+    revision: 401f1be
+    locator: environment isolation and rollback
+last_reviewed: 2026-08-05
+risk_level: high
+approval_required_for:
+  - migration review
+  - production data approval
+  - deployment
+generated_by: project-skill-workflow
+generated_at: 2026-08-05
+review:
+  status: approved
+  reviewer: user-delegated-project-skill-review
+  reviewed_at: 2026-08-05

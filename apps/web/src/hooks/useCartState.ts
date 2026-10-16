@@ -1,16 +1,20 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
+import type { Ad } from '@vps-template/contracts/ads';
 import type { AuthTokenResponse, AuthUser } from '@vps-template/contracts/auth';
 import type { Cart } from '@vps-template/contracts/cart';
 import type { Order } from '@vps-template/contracts/orders';
 import type { Product } from '@vps-template/contracts/products';
 import { request, tokenStorageKey } from '../services/api';
-import type { AuthMode, ProductForm, ToastMessage, ToastType, View } from '../types';
+import type { AdForm, AuthMode, ProductForm, ToastMessage, ToastType, View } from '../types';
 import {
+  adForm,
+  blankAdForm,
   blankProductForm,
   DEMO_EMAIL,
   DEMO_PASSWORD,
   errorMessage,
   newIdempotencyKey,
+  parseAdForm,
   parseProductForm,
   productForm,
 } from '../utils/formatters';
@@ -28,6 +32,9 @@ export function useCartState() {
   const [password, setPassword] = useState(DEMO_PASSWORD);
   const [adminForm, setAdminForm] = useState<ProductForm>(blankProductForm());
   const [editingProductId, setEditingProductId] = useState<string | null>(null);
+  const [ads, setAds] = useState<Ad[]>([]);
+  const [adFormState, setAdFormState] = useState<AdForm>(blankAdForm());
+  const [editingAdId, setEditingAdId] = useState<string | null>(null);
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [isAuthReady, setIsAuthReady] = useState(false);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -94,6 +101,11 @@ export function useCartState() {
     setOrders((await apiRequest<{ orders: Order[] }>('/orders')).orders);
   }
 
+  async function loadAds() {
+    if (!token) return;
+    setAds((await apiRequest<{ ads: Ad[] }>('/admin/ads')).ads);
+  }
+
   async function loadProfile() {
     if (!token) return;
 
@@ -118,6 +130,13 @@ export function useCartState() {
     void loadProfile().finally(() => setIsAuthReady(true));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+
+  useEffect(() => {
+    if (user?.role === 'admin') {
+      void withFeedback(loadAds);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.role]);
 
   async function authenticate(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -146,6 +165,9 @@ export function useCartState() {
     setView('catalog');
     setEditingProductId(null);
     setAdminForm(blankProductForm());
+    setEditingAdId(null);
+    setAdFormState(blankAdForm());
+    setAds([]);
     addToast('Signed out', 'info');
   }
 
@@ -236,6 +258,38 @@ export function useCartState() {
     setAdminForm(blankProductForm());
   }
 
+  async function saveAd(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    await withFeedback(
+      async () => {
+        const path = editingAdId ? `/admin/ads/${editingAdId}` : '/admin/ads';
+        const method = editingAdId ? 'PATCH' : 'POST';
+        await apiRequest(path, { method, body: JSON.stringify(parseAdForm(adFormState)) });
+        setAdFormState(blankAdForm());
+        setEditingAdId(null);
+        await loadAds();
+      },
+      editingAdId ? 'Ad updated' : 'Ad created',
+    );
+  }
+
+  async function retireAd(adId: string) {
+    await withFeedback(async () => {
+      await apiRequest(`/admin/ads/${adId}`, { method: 'DELETE' });
+      await loadAds();
+    }, 'Ad retired');
+  }
+
+  function startEditingAd(ad: Ad) {
+    setEditingAdId(ad.id);
+    setAdFormState(adForm(ad));
+  }
+
+  function cancelEditingAd() {
+    setEditingAdId(null);
+    setAdFormState(blankAdForm());
+  }
+
   return {
     view,
     setView,
@@ -257,6 +311,10 @@ export function useCartState() {
     adminForm,
     setAdminForm,
     editingProductId,
+    ads,
+    adForm: adFormState,
+    setAdForm: setAdFormState,
+    editingAdId,
     isAuthOpen,
     setIsAuthOpen,
     isAuthReady,
@@ -275,6 +333,10 @@ export function useCartState() {
     retireProduct,
     startEditing,
     cancelEditing,
+    saveAd,
+    retireAd,
+    startEditingAd,
+    cancelEditingAd,
   };
 }
 

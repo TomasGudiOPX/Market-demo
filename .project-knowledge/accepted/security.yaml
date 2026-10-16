@@ -1,0 +1,56 @@
+domain: security
+last_updated: 2026-08-05
+index_revision: working-tree-2026-08-05
+
+facts:
+  - id: security.api-security-transport-hardening
+    statement: "The API sends standard security headers on every response and rate-limits per client IP with HTTP 429 structured errors when the limit is exceeded."
+    type: invariant
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/api-security/spec.md, apps/api/src/platform/]
+    source:
+      - path: openspec/specs/api-security/spec.md
+        revision: working-tree-2026-08-05
+        locator: "API Security"
+    confidence: explicit
+    owner: security
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: security.identity-rbac-role-protection
+    statement: "Public registration creates customer users while administrator-only operations require an authenticated admin role."
+    type: invariant
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/identity-rbac/spec.md, apps/api/src/modules/auth/]
+    source:
+      - path: openspec/specs/identity-rbac/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Identity and RBAC Specification"
+    confidence: explicit
+    owner: security
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: security.telegram-db-bridge-access-control
+    statement: "The Telegram DB bridge requires valid bearer tokens, restricts Telegram access to allowed chats, bounds model-visible results, and sanitizes failure output."
+    type: invariant
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/telegram-db-bridge/spec.md]
+    source:
+      - path: openspec/specs/telegram-db-bridge/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Tool access requires a valid bearer token"
+    confidence: explicit
+    owner: security
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []

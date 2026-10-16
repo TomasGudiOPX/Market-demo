@@ -1,0 +1,62 @@
+run_id: 2026-08-05-proactive-002
+generated_at: 2026-08-05T00:00:00Z
+based_on_snapshot: 2026-08-05
+config_revision: 117f3f7f2c54
+
+gaps:
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [architecture.module-auth-ownership, security.identity-rbac-role-protection]
+    details: "Quick-mode pair shares `apps/api/src/modules/auth/`; reconcile should confirm whether ownership and RBAC facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [architecture.module-products-ownership, contracts.product-catalog-admin-behavior]
+    details: "Quick-mode pair shares `apps/api/src/modules/products/`; reconcile should confirm whether ownership and catalog/admin contract facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [architecture.module-products-ownership, contracts.product-pagination-contract]
+    details: "Quick-mode pair shares `apps/api/src/modules/products/`; reconcile should confirm whether ownership and pagination contract facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [architecture.module-cart-ownership, contracts.cart-checkout-orders-behavior]
+    details: "Quick-mode pair shares `apps/api/src/modules/cart/`; reconcile should confirm whether ownership and checkout behavior facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [architecture.module-orders-ownership, contracts.cart-checkout-orders-behavior]
+    details: "Quick-mode pair shares `apps/api/src/modules/orders/`; reconcile should confirm whether ownership and checkout behavior facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [contracts.admin-panel-dedicated-route, contracts.theme-mode-ui-behavior]
+    details: "Quick-mode pair shares `apps/web/`; reconcile should confirm whether admin-route and theme UI facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [contracts.product-catalog-admin-behavior, contracts.product-pagination-contract]
+    details: "Quick-mode pair shares `apps/api/src/modules/products/`; reconcile should confirm whether catalog/admin and pagination contract facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null
+  - type: contradiction
+    severity: critical
+    location:
+      fact_ids: [contracts.telegram-db-bridge-read-only-tools, security.telegram-db-bridge-access-control]
+    details: "Quick-mode pair shares `openspec/specs/telegram-db-bridge/spec.md`; reconcile should confirm whether tool contract and access-control facts are compatible."
+    suggested_route: proj-auto-learn-reconcile
+    suggested_trigger_payload: null

@@ -1,0 +1,216 @@
+run_id: 2026-08-06-product-reviews-01
+extracted_at: 2026-08-06
+bot_run_record: "n/a"
+openspec_change: add-product-reviews
+candidates:
+  - id: architecture.module-reviews-ownership
+    statement: "Reviews are a standalone NestJS domain module at apps/api/src/modules/reviews/ with its own controller, service, repository, and types; it references Product and User via foreign keys without embedding review state into the Product model."
+    type: invariant
+    status: candidate
+    scope:
+      kind: module
+      paths:
+        - apps/api/src/modules/reviews/
+        - apps/api/src/app.ts
+    source:
+      - path: apps/api/src/modules/reviews/review.module.ts
+        revision: "543efb6"
+        locator: "ReviewsModule"
+      - path: apps/api/src/app.ts
+        revision: "543efb6"
+        locator: "AppModule.forConfig"
+      - path: openspec/changes/add-product-reviews/proposal.md
+        revision: "543efb6"
+        locator: "What Changes"
+      - path: docs/DESIGN.md
+        revision: "543efb6"
+        locator: "Design Decisions"
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-06
+    supersedes: []
+    proposed_document_update:
+      target: AGENT.md
+      change: "Add reviews to the modules list under Architecture: 'apps/api/src/modules/ owns business modules: auth, products, cart, orders, and reviews.'"
+
+  - id: contracts.reviews-data-shapes
+    statement: "The reviews shared contract exports reviewSchema (id, productId, userId, rating 1-10, comment, createdAt, updatedAt) and reviewMutationSchema (rating integer 1-10, comment trimmed string 1-100 chars)."
+    type: contract
+    status: candidate
+    scope:
+      kind: module
+      paths:
+        - packages/contracts/src/reviews.ts
+    source:
+      - path: packages/contracts/src/reviews.ts
+        revision: "543efb6"
+        locator: "reviewSchema, reviewMutationSchema"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-06
+    supersedes: []
+    proposed_document_update:
+      target: docs/DESIGN.md
+      change: "Confirm reviews contract shapes in the Design Decisions table; already present via reviews-as-standalone-module row."
+
+  - id: contracts.reviews-api-routes
+    statement: "Reviews expose three endpoints: GET /api/products/:productId/reviews (public, lists reviews for active products only), POST /api/products/:productId/reviews (authenticated, creates one review per customer per product), PATCH /api/reviews/:reviewId (authenticated, updates only the owning customer's review)."
+    type: contract
+    status: candidate
+    scope:
+      kind: module
+      paths:
+        - apps/api/src/modules/reviews/review.controller.ts
+    source:
+      - path: apps/api/src/modules/reviews/review.controller.ts
+        revision: "543efb6"
+        locator: "ProductReviewController, ReviewController"
+      - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+        revision: "543efb6"
+        locator: "Product Reviews Specification"
+    confidence: corroborated
+    owner: contracts
+    last_verified: 2026-08-06
+    supersedes: []
+
+  - id: data.reviews-table-schema
+    statement: "The Review table has columns id (UUID PK default gen_random_uuid), product_id (UUID FK -> products ON DELETE RESTRICT), user_id (UUID FK -> users ON DELETE CASCADE), rating (INTEGER with CHECK >= 1 AND <= 10), comment (VARCHAR(100) with CHECK length <= 100), created_at, updated_at; unique constraint on (product_id, user_id); index on (product_id, created_at)."
+    type: contract
+    status: candidate
+    scope:
+      kind: module
+      paths:
+        - apps/api/prisma/schema.prisma
+        - apps/api/prisma/migrations/20260806120000_add_product_reviews/
+    source:
+      - path: apps/api/prisma/migrations/20260806120000_add_product_reviews/migration.sql
+        revision: "543efb6"
+        locator: "CREATE TABLE reviews"
+      - path: apps/api/prisma/schema.prisma
+        revision: "543efb6"
+        locator: "Review model"
+    confidence: explicit
+    owner: data
+    last_verified: 2026-08-06
+    supersedes: []
+
+  - id: data.reviews-constraints-and-indexes
+    statement: "Reviews enforce one review per customer per product via UNIQUE(product_id, user_id); product FK uses ON DELETE RESTRICT to preserve reviews for retired products; user FK uses ON DELETE CASCADE; a composite index on (product_id, created_at) supports sorted public listing."
+    type: invariant
+    status: candidate
+    scope:
+      kind: module
+      paths:
+        - apps/api/prisma/schema.prisma
+    source:
+      - path: apps/api/prisma/schema.prisma
+        revision: "543efb6"
+        locator: "Review model"
+      - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+        revision: "543efb6"
+        locator: "Review data ownership"
+    confidence: corroborated
+    owner: data
+    last_verified: 2026-08-06
+    supersedes: []
+
+  - id: delivery.reviews-fr09-requirement
+    statement: "FR-09 defines product reviews: visitors list reviews for active products unauthenticated; authenticated customers create one review per active product; customers update only their own review; products that are missing or retired reject review operations with REVIEW_PRODUCT_NOT_FOUND."
+    type: contract
+    status: candidate
+    scope:
+      kind: repository
+      paths:
+        - docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md
+        - openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+    source:
+      - path: docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md
+        revision: "543efb6"
+        locator: "FR-09 - Resenas de productos"
+      - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+        revision: "543efb6"
+        locator: "Product Reviews Specification"
+    confidence: corroborated
+    owner: delivery
+    last_verified: 2026-08-06
+    supersedes: []
+
+  - id: delivery.reviews-vault-evidence-slice
+    statement: "Evidence slice Evidencia - Product Reviews traces FR-09 with a complete Eslabon chain: requisitos (FR-09, NFR-01/02/03), OpenSpec (add-product-reviews), decision ('consumer' = authenticated customer), arquitectura (Modulos de Dominio), AI prompt (AI-2026-08-06-01), implementacion (contracts, prisma, module, app wiring), pruebas (Prisma validate, contracts build, API build, API tests OK 11 archivos 42 tests, yarn build OK)."
+    type: observation
+    status: candidate
+    scope:
+      kind: repository
+      paths:
+        - docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md
+    source:
+      - path: docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md
+        revision: "543efb6"
+        locator: "Evidencia - Product Reviews"
+    confidence: explicit
+    owner: delivery
+    last_verified: 2026-08-06
+    supersedes: []
+
+  - id: delivery.reviews-ai-session
+    statement: "AI session AI-2026-08-06-01 implemented product reviews via Codex using openspec-apply-change and local proj-bot/proj-bot-shared skills; human review confirmed 'consumer' means authenticated customer (not verified-purchase) to avoid order-history dependency; contract, model, migration, API, tests, and vault evidence all verified."
+    type: observation
+    status: candidate
+    scope:
+      kind: repository
+      paths:
+        - docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md
+        - INFORME_IA.md
+    source:
+      - path: docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md
+        revision: "543efb6"
+        locator: "AI-2026-08-06-01 - Product reviews"
+      - path: INFORME_IA.md
+        revision: "543efb6"
+        locator: "AI-2026-08-06-01 - Product reviews"
+    confidence: explicit
+    owner: delivery
+    last_verified: 2026-08-06
+    supersedes: []
+
+reconciliation:
+  verdicts:
+    - id: architecture.module-reviews-ownership
+      verdict: new
+      pending-human-review: true
+      review_reason: "Owner=architecture; confidence=corroborated; high-impact domain requires human acceptance."
+      reviewer_role: "architecture-reviewer (AGENT.md -> Architecture, docs/DESIGN.md)"
+      note: "No prior fact with this ID."
+    - id: contracts.reviews-data-shapes
+      verdict: new
+      pending-human-review: true
+      review_reason: "Owner=contracts; confidence=explicit; high-impact domain requires human acceptance."
+      reviewer_role: "contracts-reviewer (AGENT.md -> docs/DESIGN.md, openspec)"
+      note: "No prior fact with this ID."
+    - id: contracts.reviews-api-routes
+      verdict: new
+      pending-human-review: true
+      review_reason: "Owner=contracts; confidence=corroborated; high-impact domain requires human acceptance."
+      reviewer_role: "contracts-reviewer (AGENT.md -> docs/DESIGN.md, openspec)"
+      note: "No prior fact with this ID."
+    - id: data.reviews-table-schema
+      verdict: new
+      pending-human-review: true
+      review_reason: "Owner=data; confidence=explicit; high-impact domain requires human acceptance."
+      reviewer_role: "data-reviewer (AGENT.md -> docs/DEVELOPMENT.md, docs/VPS-DOC.md)"
+      note: "No prior fact with this ID. Data domain was empty."
+    - id: data.reviews-constraints-and-indexes
+      verdict: new
+      pending-human-review: true
+      review_reason: "Owner=data; confidence=corroborated; high-impact domain requires human acceptance."
+      reviewer_role: "data-reviewer (AGENT.md -> docs/DEVELOPMENT.md, docs/VPS-DOC.md)"
+      note: "No prior fact with this ID. Data domain was empty."
+    - id: delivery.reviews-fr09-requirement
+      verdict: new
+      note: "No prior fact with this ID."
+    - id: delivery.reviews-vault-evidence-slice
+      verdict: new
+      note: "No prior fact with this ID."
+    - id: delivery.reviews-ai-session
+      verdict: new
+      note: "No prior fact with this ID."

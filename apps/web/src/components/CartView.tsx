@@ -1,6 +1,7 @@
 import type { Cart } from '@vps-template/contracts/cart';
 import type { View } from '../types';
 import { money } from '../utils/formatters';
+import { AdSlot } from './AdSlot';
 
 interface CartViewProps {
   cart: Cart | null;
@@ -161,6 +162,7 @@ export function CartView({ cart, setView, onUpdateQuantity, onRemoveItem, isBusy
               </svg>
             </button>
           </div>
+          <AdSlot placement="cart_summary" />
         </aside>
       </div>
     </section>

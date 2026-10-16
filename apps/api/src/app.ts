@@ -6,6 +6,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { AdsModule } from './modules/ads/ad.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { CartModule } from './modules/cart/cart.module.js';
 import { OrderModule } from './modules/orders/order.module.js';
@@ -25,6 +26,7 @@ class AppModule {
     const imports = [
       PlatformModule.forConfig(config),
       ThrottlerModule.forRoot([{ ttl: 60_000, limit: 300 }]),
+      AdsModule,
       AuthModule,
       ProductModule,
       CartModule,
@@ -53,7 +55,7 @@ export async function createApp(config: AppConfig): Promise<NestFastifyApplicati
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Shopping Cart API')
-    .setDescription('REST API for catalog, authentication, cart, checkout, orders, and product administration.')
+    .setDescription('REST API for catalog, ads, authentication, cart, checkout, orders, and administration.')
     .setVersion('1.0.0')
     .addBearerAuth()
     .build();

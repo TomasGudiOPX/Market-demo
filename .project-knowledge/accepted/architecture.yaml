@@ -1,0 +1,134 @@
+domain: architecture
+last_updated: 2026-08-05
+index_revision: working-tree-2026-08-05
+
+facts:
+  - id: architecture.module-auth-ownership
+    statement: "The auth module owns User credentials and identity; JWT and guards protect routes."
+    type: ownership
+    status: accepted
+    scope:
+      kind: module
+      paths: [apps/api/src/modules/auth/]
+    source:
+      - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+        revision: working-tree-2026-08-05
+        locator: "Auth"
+      - path: AGENT.md
+        revision: working-tree-2026-08-05
+        locator: "Architecture"
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: architecture.module-products-ownership
+    statement: "The products module owns Product; catalog and detail are public while admin creates, updates, and logically retires products."
+    type: ownership
+    status: accepted
+    scope:
+      kind: module
+      paths: [apps/api/src/modules/products/]
+    source:
+      - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+        revision: working-tree-2026-08-05
+        locator: "Products"
+      - path: AGENT.md
+        revision: working-tree-2026-08-05
+        locator: "Architecture"
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: architecture.module-cart-ownership
+    statement: "The cart module owns the authenticated user's Cart and CartItem state."
+    type: ownership
+    status: accepted
+    scope:
+      kind: module
+      paths: [apps/api/src/modules/cart/]
+    source:
+      - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+        revision: working-tree-2026-08-05
+        locator: "Cart"
+      - path: AGENT.md
+        revision: working-tree-2026-08-05
+        locator: "Architecture"
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: architecture.module-orders-ownership
+    statement: "The orders module owns Order, OrderItem, and checkout idempotency."
+    type: ownership
+    status: accepted
+    scope:
+      kind: module
+      paths: [apps/api/src/modules/orders/]
+    source:
+      - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+        revision: working-tree-2026-08-05
+        locator: "Orders"
+      - path: AGENT.md
+        revision: working-tree-2026-08-05
+        locator: "Architecture"
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: architecture.module-projects-empty-scaffold
+    statement: "apps/api/src/modules/projects/ is an empty scaffold and is not an active business module."
+    type: observation
+    status: accepted
+    scope:
+      kind: module
+      paths: [apps/api/src/modules/projects/]
+    source:
+      - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+        revision: working-tree-2026-08-05
+        locator: "Projects"
+    confidence: explicit
+    owner: architecture
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: architecture.module-reviews-ownership
+    statement: "Reviews are a standalone NestJS domain module at apps/api/src/modules/reviews/ with its own controller, service, repository, and types; it references Product and User via foreign keys without embedding review state into the Product model."
+    type: invariant
+    status: accepted
+    scope:
+      kind: module
+      paths:
+        - apps/api/src/modules/reviews/
+        - apps/api/src/app.ts
+    source:
+      - path: apps/api/src/modules/reviews/review.module.ts
+        revision: "543efb6"
+        locator: "ReviewsModule"
+      - path: apps/api/src/app.ts
+        revision: "543efb6"
+        locator: "AppModule.forConfig"
+      - path: openspec/changes/add-product-reviews/proposal.md
+        revision: "543efb6"
+        locator: "What Changes"
+      - path: docs/DESIGN.md
+        revision: "543efb6"
+        locator: "Design Decisions"
+    confidence: corroborated
+    owner: architecture
+    last_verified: 2026-08-06
+    promoted_from: architecture.module-reviews-ownership
+    review_required: true
+    review_basis: explicit-user-request
+    approved_by: user
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []

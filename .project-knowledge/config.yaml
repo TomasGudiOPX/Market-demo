@@ -1,0 +1,57 @@
+# .project-knowledge/config.yaml — project-specific config for the proj-auto-learn proactive loop.
+#
+# Copy this file into your repo at `.project-knowledge/config.yaml` and edit.
+# Every field commented here is optional; the proactive skills use these values
+# as defaults when the file is absent or when a field is unset.
+#
+# Schema reference: proj-auto-learn-shared/references/metrics-and-gaps.md §6.
+
+# Severity calibration — gap classification thresholds.
+severity:
+  undocumented_module_high_commit_count: 3       # commits in window → high severity
+  undocumented_module_high_commit_window_days: 30
+  unrecorded_decision_overdue_runs: 2              # inferred candidate sitting > N runs → unrecorded-decision gap
+  stale_overdue_days: 30                          # staleness threshold (days)
+  stale_overdue_high_impact_only: false           # when true, only high-impact owners become overdue-high
+
+# Coverage thresholds — what counts as `covered` vs `sparse` vs `undocumented`.
+coverage:
+  sparse_max_facts: 2                              # 1-2 facts = sparse; 0 = undocumented; ≥3 = covered
+
+# Contradiction detection — pick mode (quick, deep, or both).
+# quick = deterministic heuristic, no model required, runs in seconds.
+# deep  = model-assisted semantic check on top of quick mode.
+# both  = keep raw heuristic pairs AND the semantic-confirmed subset; headline count uses deep.
+contradiction:
+  mode: quick
+  deep_model: null                                 # model id for semantic check (null = use the session model)
+  quick_dedupe_by_scope: true                      # only flag pairs with shared scope.paths
+
+# Snapshot retention and archive.
+retention:
+  active_retention_days: 90                        # snapshots stay in metrics/snapshots/ for this long
+  archive_after_days: 90                           # after this many days, move to metrics/archive/
+  archive_summary_fields:                         # which top-level fields the archive compact keeps
+    - snapshot_date
+    - scan_run_id
+    - summary
+  deep_retention_days: 365                         # archived snapshots retained this long before deletion
+
+# Proactive triggers — what counts as a backlog threshold for suggesting `audit`.
+proactive_triggers:
+  staleness_backlog_threshold: 10                  # > N high-impact stale rows → router suggests audit
+  auto_recommend: false                            # NOT IMPLEMENTED — must be false; see README
+
+# Audit scope — where to scan.
+scope:
+  modules_root: apps/api/src/modules
+  vault_path: docs/obsidian-vault
+  openspec_path: openspec
+  adrs_path: docs/obsidian-vault/04 Gestion/Registro de Decisiones.md
+
+# Run-record producer independence — the workflow accepts run records in the format
+# documented in `proj-auto-learn-shared/references/run-record-format.md`
+# from ANY producer. `proj-bot` is one optional producer, not a requirement.
+run_records:
+  producer_required: false                         # workflow runs without any bot/producer
+  record_path: .project-knowledge/runs

@@ -1,0 +1,154 @@
+domain: contracts
+last_updated: 2026-08-05
+index_revision: working-tree-2026-08-05
+
+facts:
+  - id: contracts.admin-panel-dedicated-route
+    statement: "The administrator product-management console is exposed at /admin as a deep-linkable and refreshable dedicated route."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/admin-panel/spec.md, apps/web/]
+    source:
+      - path: openspec/specs/admin-panel/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Admin console has a dedicated route"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: contracts.cart-checkout-orders-behavior
+    statement: "Cart, checkout, idempotency, stock safety, and order history behavior are governed by the cart-checkout-orders OpenSpec capability."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/cart-checkout-orders/spec.md, apps/api/src/modules/cart/, apps/api/src/modules/orders/]
+    source:
+      - path: openspec/specs/cart-checkout-orders/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Cart, Checkout, and Orders Specification"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: contracts.product-catalog-admin-behavior
+    statement: "Product catalog and admin behavior includes public active catalog/detail, admin-only create/update/retire, logical retirement, and deterministic seed catalog."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/product-catalog-admin/spec.md, apps/api/src/modules/products/]
+    source:
+      - path: openspec/specs/product-catalog-admin/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Product Catalog and Admin Specification"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: contracts.product-pagination-contract
+    statement: "GET /api/products accepts optional page and pageSize query parameters and returns pagination metadata with validated errors for invalid values."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/product-pagination/spec.md, apps/api/src/modules/products/]
+    source:
+      - path: openspec/specs/product-pagination/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Paginated product listing"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: contracts.theme-mode-ui-behavior
+    statement: "The web UI supports light and dark themes with runtime toggles, persistence, and first-visit defaulting to the operating system color scheme."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/theme-mode/spec.md, apps/web/]
+    source:
+      - path: openspec/specs/theme-mode/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Theme Mode"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: contracts.telegram-db-bridge-read-only-tools
+    statement: "The Telegram DB bridge exposes structured read-only MCP tools for list_tables, describe_table, and bounded select operations."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths: [openspec/specs/telegram-db-bridge/spec.md]
+    source:
+      - path: openspec/specs/telegram-db-bridge/spec.md
+        revision: working-tree-2026-08-05
+        locator: "Structured read-only database tools"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []
+  - id: contracts.reviews-data-shapes
+    statement: "The reviews shared contract exports reviewSchema (id, productId, userId, rating 1-10, comment, createdAt, updatedAt) and reviewMutationSchema (rating integer 1-10, comment trimmed string 1-100 chars)."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths:
+        - packages/contracts/src/reviews.ts
+    source:
+      - path: packages/contracts/src/reviews.ts
+        revision: "543efb6"
+        locator: "reviewSchema, reviewMutationSchema"
+    confidence: explicit
+    owner: contracts
+    last_verified: 2026-08-06
+    promoted_from: contracts.reviews-data-shapes
+    review_required: true
+    review_basis: explicit-user-request
+    approved_by: user
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []
+  - id: contracts.reviews-api-routes
+    statement: "Reviews expose three endpoints: GET /api/products/:productId/reviews (public, lists reviews for active products only), POST /api/products/:productId/reviews (authenticated, creates one review per customer per product), PATCH /api/reviews/:reviewId (authenticated, updates only the owning customer's review)."
+    type: contract
+    status: accepted
+    scope:
+      kind: module
+      paths:
+        - apps/api/src/modules/reviews/review.controller.ts
+    source:
+      - path: apps/api/src/modules/reviews/review.controller.ts
+        revision: "543efb6"
+        locator: "ProductReviewController, ReviewController"
+      - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+        revision: "543efb6"
+        locator: "Product Reviews Specification"
+    confidence: corroborated
+    owner: contracts
+    last_verified: 2026-08-06
+    promoted_from: contracts.reviews-api-routes
+    review_required: true
+    review_basis: explicit-user-request
+    approved_by: user
+    approved_at: 2026-08-06
+    approval_reference: "2026-08-06-product-reviews-01"
+    supersedes: []

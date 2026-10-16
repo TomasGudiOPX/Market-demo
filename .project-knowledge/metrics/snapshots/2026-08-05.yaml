@@ -1,0 +1,143 @@
+snapshot_date: 2026-08-05
+scan_run_id: 2026-08-05-proactive-002
+config_revision: 117f3f7f2c54
+mode: quick
+modules_root: apps/api/src/modules
+vault_path: docs/obsidian-vault
+openspec_path: openspec
+
+domains:
+  architecture:
+    fact_count: 5
+    accepted_count: 5
+    candidate_count: 5
+    stale_count: 0
+    contradiction_count: 5
+  contracts:
+    fact_count: 6
+    accepted_count: 6
+    candidate_count: 6
+    stale_count: 0
+    contradiction_count: 3
+  data:
+    fact_count: 0
+    accepted_count: 0
+    candidate_count: 0
+    stale_count: 0
+    contradiction_count: 0
+  operations:
+    fact_count: 1
+    accepted_count: 1
+    candidate_count: 1
+    stale_count: 0
+    contradiction_count: 0
+  security:
+    fact_count: 3
+    accepted_count: 3
+    candidate_count: 3
+    stale_count: 0
+    contradiction_count: 0
+  delivery:
+    fact_count: 1
+    accepted_count: 1
+    candidate_count: 1
+    stale_count: 0
+    contradiction_count: 0
+
+modules:
+  - path: apps/api/src/modules/auth/
+    fact_count: 2
+    recent_commit_count: 5
+    recent_commit_window_days: 30
+    undocumented: false
+    coverage_status: sparse
+  - path: apps/api/src/modules/cart/
+    fact_count: 2
+    recent_commit_count: 4
+    recent_commit_window_days: 30
+    undocumented: false
+    coverage_status: sparse
+  - path: apps/api/src/modules/orders/
+    fact_count: 2
+    recent_commit_count: 3
+    recent_commit_window_days: 30
+    undocumented: false
+    coverage_status: sparse
+  - path: apps/api/src/modules/products/
+    fact_count: 3
+    recent_commit_count: 5
+    recent_commit_window_days: 30
+    undocumented: false
+    coverage_status: covered
+
+requirements:
+  total_ids: 13
+  traced_ids: 13
+  coverage_ratio: 1.0
+  untraced: []
+
+openspec_vault_linkage:
+  total_changes: 8
+  linked_changes: 8
+  coverage_ratio: 1.0
+  unlinked: []
+
+adrs:
+  total: 10
+  orphaned: []
+  superseded_active: []
+
+candidates:
+  total: 16
+  overdue: []
+
+contradictions:
+  quick:
+    - fact_a: architecture.module-auth-ownership
+      fact_b: security.identity-rbac-role-protection
+      shared_scope_paths: [apps/api/src/modules/auth/]
+      statement_hash_differs: true
+    - fact_a: architecture.module-products-ownership
+      fact_b: contracts.product-catalog-admin-behavior
+      shared_scope_paths: [apps/api/src/modules/products/]
+      statement_hash_differs: true
+    - fact_a: architecture.module-products-ownership
+      fact_b: contracts.product-pagination-contract
+      shared_scope_paths: [apps/api/src/modules/products/]
+      statement_hash_differs: true
+    - fact_a: architecture.module-cart-ownership
+      fact_b: contracts.cart-checkout-orders-behavior
+      shared_scope_paths: [apps/api/src/modules/cart/]
+      statement_hash_differs: true
+    - fact_a: architecture.module-orders-ownership
+      fact_b: contracts.cart-checkout-orders-behavior
+      shared_scope_paths: [apps/api/src/modules/orders/]
+      statement_hash_differs: true
+    - fact_a: contracts.admin-panel-dedicated-route
+      fact_b: contracts.theme-mode-ui-behavior
+      shared_scope_paths: [apps/web/]
+      statement_hash_differs: true
+    - fact_a: contracts.product-catalog-admin-behavior
+      fact_b: contracts.product-pagination-contract
+      shared_scope_paths: [apps/api/src/modules/products/]
+      statement_hash_differs: true
+    - fact_a: contracts.telegram-db-bridge-read-only-tools
+      fact_b: security.telegram-db-bridge-access-control
+      shared_scope_paths: [openspec/specs/telegram-db-bridge/spec.md]
+      statement_hash_differs: true
+  deep: []
+
+staleness:
+  stale_count: 0
+  overdue_count: 0
+  overdue_high_impact_count: 0
+  overdue: []
+
+summary:
+  module_coverage_ratio: 1.0
+  requirement_coverage_ratio: 1.0
+  openspec_vault_linkage_ratio: 1.0
+  undocumented_module_count: 0
+  unrecorded_decision_count: 0
+  orphaned_adr_count: 0
+  contradiction_count: 8

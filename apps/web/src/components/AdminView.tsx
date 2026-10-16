@@ -1,17 +1,26 @@
 import { FormEvent } from 'react';
+import type { Ad } from '@vps-template/contracts/ads';
 import type { Product } from '@vps-template/contracts/products';
-import type { ProductForm } from '../types';
-import { categoryLabel, money, productCategoryOptions } from '../utils/formatters';
+import type { AdForm, ProductForm } from '../types';
+import { adPlacementLabel, adPlacementOptions, categoryLabel, formatDate, money, productCategoryOptions } from '../utils/formatters';
 
 interface AdminViewProps {
   products: Product[];
   adminForm: ProductForm;
   setAdminForm: (form: ProductForm) => void;
   editingProductId: string | null;
+  ads: Ad[];
+  adForm: AdForm;
+  setAdForm: (form: AdForm) => void;
+  editingAdId: string | null;
   onSaveProduct: (event: FormEvent<HTMLFormElement>) => Promise<void>;
   onRetireProduct: (productId: string) => Promise<void>;
   onStartEditing: (product: Product) => void;
   onCancelEditing: () => void;
+  onSaveAd: (event: FormEvent<HTMLFormElement>) => Promise<void>;
+  onRetireAd: (adId: string) => Promise<void>;
+  onStartEditingAd: (ad: Ad) => void;
+  onCancelEditingAd: () => void;
   isBusy: boolean;
 }
 
@@ -20,13 +29,22 @@ export function AdminView({
   adminForm,
   setAdminForm,
   editingProductId,
+  ads,
+  adForm,
+  setAdForm,
+  editingAdId,
   onSaveProduct,
   onRetireProduct,
   onStartEditing,
   onCancelEditing,
+  onSaveAd,
+  onRetireAd,
+  onStartEditingAd,
+  onCancelEditingAd,
   isBusy,
 }: AdminViewProps) {
   const isEditing = Boolean(editingProductId);
+  const isEditingAd = Boolean(editingAdId);
 
   return (
     <section className="admin-section view-transition">
@@ -167,6 +185,176 @@ export function AdminView({
                       className="ghost-btn retire-action"
                       disabled={isBusy}
                       onClick={() => void onRetireProduct(product.id)}
+                      type="button"
+                    >
+                      Retire
+                    </button>
+                  </div>
+                </article>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div className="admin-header ads-admin-header">
+        <span className="eyebrow">Merchandising</span>
+        <h2 className="panel-title">Ad Placement Management</h2>
+      </div>
+
+      <div className="admin-grid ads-admin-grid">
+        <form className="admin-form-card" onSubmit={onSaveAd}>
+          <div className="form-card-header">
+            <h2>{isEditingAd ? 'Edit Ad' : 'Create New Ad'}</h2>
+            {isEditingAd && (
+              <button className="ghost-btn cancel-btn" onClick={onCancelEditingAd} type="button">
+                Cancel
+              </button>
+            )}
+          </div>
+
+          <label className="form-field">
+            <span>Title</span>
+            <input
+              placeholder="e.g. Workspace essentials"
+              value={adForm.title}
+              onChange={(event) => setAdForm({ ...adForm, title: event.target.value })}
+              required
+            />
+          </label>
+
+          <label className="form-field">
+            <span>Image URL</span>
+            <input
+              placeholder="https://images.unsplash.com/..."
+              value={adForm.imageUrl}
+              onChange={(event) => setAdForm({ ...adForm, imageUrl: event.target.value })}
+              required
+            />
+          </label>
+
+          <div className="form-two-cols">
+            <label className="form-field">
+              <span>Placement</span>
+              <select
+                value={adForm.placement}
+                onChange={(event) => setAdForm({ ...adForm, placement: event.target.value as AdForm['placement'] })}
+                required
+              >
+                {adPlacementOptions.map(([placement, label]) => (
+                  <option key={placement} value={placement}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="form-field">
+              <span>Priority</span>
+              <input
+                min={0}
+                max={1000}
+                type="number"
+                value={adForm.priority}
+                onChange={(event) => setAdForm({ ...adForm, priority: event.target.value })}
+                required
+              />
+            </label>
+          </div>
+
+          <div className="form-two-cols">
+            <label className="form-field">
+              <span>Target Type</span>
+              <select
+                value={adForm.targetMode}
+                onChange={(event) => setAdForm({ ...adForm, targetMode: event.target.value as AdForm['targetMode'] })}
+              >
+                <option value="product">Product</option>
+                <option value="url">URL</option>
+              </select>
+            </label>
+
+            {adForm.targetMode === 'product' ? (
+              <label className="form-field">
+                <span>Product Target</span>
+                <select value={adForm.productId} onChange={(event) => setAdForm({ ...adForm, productId: event.target.value })} required>
+                  <option value="">Select product</option>
+                  {products.map((product) => (
+                    <option key={product.id} value={product.id}>
+                      {product.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : (
+              <label className="form-field">
+                <span>Target URL</span>
+                <input
+                  placeholder="https://example.com/campaign"
+                  value={adForm.targetUrl}
+                  onChange={(event) => setAdForm({ ...adForm, targetUrl: event.target.value })}
+                  required
+                />
+              </label>
+            )}
+          </div>
+
+          <div className="form-two-cols">
+            <label className="form-field">
+              <span>Starts At</span>
+              <input type="datetime-local" value={adForm.startsAt} onChange={(event) => setAdForm({ ...adForm, startsAt: event.target.value })} />
+            </label>
+            <label className="form-field">
+              <span>Ends At</span>
+              <input type="datetime-local" value={adForm.endsAt} onChange={(event) => setAdForm({ ...adForm, endsAt: event.target.value })} />
+            </label>
+          </div>
+
+          <label className="stock-filter-toggle ad-active-toggle">
+            <input
+              type="checkbox"
+              checked={adForm.isActive}
+              onChange={(event) => setAdForm({ ...adForm, isActive: event.target.checked })}
+            />
+            <span>Active</span>
+          </label>
+
+          <button className="primary-btn form-submit-btn" disabled={isBusy} type="submit">
+            {isBusy ? <span className="btn-spinner"></span> : isEditingAd ? 'Save Ad Changes' : 'Create Ad'}
+          </button>
+        </form>
+
+        <div className="admin-table-card">
+          <h2>Ads ({ads.length})</h2>
+
+          <div className="admin-products-list">
+            {ads.length === 0 ? (
+              <p className="empty-table-text">No ads created yet.</p>
+            ) : (
+              ads.map((ad) => (
+                <article className="admin-product-row admin-ad-row" key={ad.id}>
+                  <img className="admin-product-thumb" alt={ad.title} src={ad.imageUrl} />
+
+                  <div className="admin-product-info">
+                    <strong>{ad.title}</strong>
+                    <span className="admin-product-category">{adPlacementLabel(ad.placement)}</span>
+                    <span className="admin-product-price">
+                      Priority {ad.priority} · {ad.startsAt ? formatDate(ad.startsAt) : 'Always on'}
+                    </span>
+                  </div>
+
+                  <span className={`stock-badge ${ad.isActive && !ad.retiredAt ? 'badge-success' : 'badge-danger'}`}>
+                    {ad.isActive && !ad.retiredAt ? 'Active' : 'Retired'}
+                  </span>
+
+                  <div className="admin-row-actions">
+                    <button className="ghost-btn edit-action" onClick={() => onStartEditingAd(ad)} type="button">
+                      Edit
+                    </button>
+                    <button
+                      className="ghost-btn retire-action"
+                      disabled={isBusy || Boolean(ad.retiredAt)}
+                      onClick={() => void onRetireAd(ad.id)}
                       type="button"
                     >
                       Retire

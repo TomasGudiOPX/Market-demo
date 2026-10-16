@@ -1,0 +1,133 @@
+run_id: 2026-08-05-proactive-001
+generated_at: 2026-08-05T00:00:00Z
+based_on_snapshot: 2026-08-05
+config_revision: default-template
+
+gaps:
+  - type: undocumented-module
+    severity: medium
+    location:
+      module_path: apps/api/src/modules/auth/
+    details: "Module `apps/api/src/modules/auth/` has 0 accepted facts."
+    suggested_route: proj-auto-learn-detect
+    suggested_trigger_payload:
+      module_paths: [apps/api/src/modules/auth/]
+      requirement_ids: []
+      adr_ids: []
+  - type: undocumented-module
+    severity: medium
+    location:
+      module_path: apps/api/src/modules/cart/
+    details: "Module `apps/api/src/modules/cart/` has 0 accepted facts."
+    suggested_route: proj-auto-learn-detect
+    suggested_trigger_payload:
+      module_paths: [apps/api/src/modules/cart/]
+      requirement_ids: []
+      adr_ids: []
+  - type: undocumented-module
+    severity: medium
+    location:
+      module_path: apps/api/src/modules/orders/
+    details: "Module `apps/api/src/modules/orders/` has 0 accepted facts."
+    suggested_route: proj-auto-learn-detect
+    suggested_trigger_payload:
+      module_paths: [apps/api/src/modules/orders/]
+      requirement_ids: []
+      adr_ids: []
+  - type: undocumented-module
+    severity: medium
+    location:
+      module_path: apps/api/src/modules/products/
+    details: "Module `apps/api/src/modules/products/` has 0 accepted facts."
+    suggested_route: proj-auto-learn-detect
+    suggested_trigger_payload:
+      module_paths: [apps/api/src/modules/products/]
+      requirement_ids: []
+      adr_ids: []
+  - type: undocumented-module
+    severity: medium
+    location:
+      module_path: apps/api/src/modules/projects/
+    details: "Module `apps/api/src/modules/projects/` has 0 accepted facts."
+    suggested_route: proj-auto-learn-detect
+    suggested_trigger_payload:
+      module_paths: [apps/api/src/modules/projects/]
+      requirement_ids: []
+      adr_ids: []
+  - type: openspec-vault-disconnect
+    severity: medium
+    location:
+      openspec_slug: openspec/changes/archive/2026-08-04-add-telegram-db-mcp-bridge
+    details: "OpenSpec change `openspec/changes/archive/2026-08-04-add-telegram-db-mcp-bridge` has no vault mention."
+    suggested_route: proj-auto-learn-publish
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/admin-panel/spec.md
+    details: "OpenSpec spec `openspec/specs/admin-panel/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/api-security/spec.md
+    details: "OpenSpec spec `openspec/specs/api-security/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/cart-checkout-orders/spec.md
+    details: "OpenSpec spec `openspec/specs/cart-checkout-orders/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/delivery-docs-ci-polish/spec.md
+    details: "OpenSpec spec `openspec/specs/delivery-docs-ci-polish/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/deployment-environments.md
+    details: "OpenSpec spec `openspec/specs/deployment-environments.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/identity-rbac/spec.md
+    details: "OpenSpec spec `openspec/specs/identity-rbac/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/product-catalog-admin/spec.md
+    details: "OpenSpec spec `openspec/specs/product-catalog-admin/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/product-pagination/spec.md
+    details: "OpenSpec spec `openspec/specs/product-pagination/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/telegram-db-bridge/spec.md
+    details: "OpenSpec spec `openspec/specs/telegram-db-bridge/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null
+  - type: undocumented-openspec-spec
+    severity: low
+    location:
+      openspec_slug: openspec/specs/theme-mode/spec.md
+    details: "OpenSpec spec `openspec/specs/theme-mode/spec.md` has no accepted fact citing it."
+    suggested_route: proj-auto-learn-extract
+    suggested_trigger_payload: null

@@ -53,6 +53,13 @@ async function run() {
     throw new Error('public catalog: no in-stock product available');
   }
 
+  const ads = await request('/api/ads?placement=catalog_hero');
+  expectStatus('public catalog ads', ads.status, 200);
+  if (!Array.isArray(ads.data.ads)) {
+    throw new Error('public catalog ads: ads response is not an array');
+  }
+  checks.push('public ads response shape');
+
   const email = `qa-smoke-${Date.now()}@example.com`;
   const registration = await request('/api/auth/register', {
     method: 'POST',
@@ -73,6 +80,19 @@ async function run() {
     },
   });
   expectStatus('customer admin write forbidden', forbiddenAdminWrite.status, 403);
+
+  const forbiddenAdminAdWrite = await request('/api/admin/ads', {
+    method: 'POST',
+    token,
+    body: {
+      title: 'Unauthorized QA Ad',
+      imageUrl: 'https://example.com/unauthorized-qa-ad.png',
+      placement: 'catalog_hero',
+      productId: product.id,
+      priority: 1,
+    },
+  });
+  expectStatus('customer admin ad write forbidden', forbiddenAdminAdWrite.status, 403);
 
   const added = await request('/api/cart/items', {
     method: 'POST',

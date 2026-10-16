@@ -1,0 +1,38 @@
+id: cart-mcp-tool
+version: 1.0.0
+scope: project
+status: active
+category: mcp-tool
+owners:
+  - architecture
+  - security
+  - contracts
+sources:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Working Rules
+  - path: docs/DESIGN.md
+    revision: a8d6bbd
+    locator: source boundaries
+  - path: openspec/specs/telegram-db-bridge/spec.md
+    revision: 6163fc9
+    locator: accepted MCP bridge behavior
+  - path: apps/api/src/engine/mcp
+    revision: 6163fc9
+    locator: MCP implementation
+  - path: apps/api/src/modules
+    revision: 6163fc9
+    locator: module services
+last_reviewed: 2026-08-05
+risk_level: high
+approval_required_for:
+  - mcp tool design review
+  - mcp write-action approval
+  - code review
+  - security changes
+generated_by: project-skill-workflow
+generated_at: 2026-08-05
+review:
+  status: approved
+  reviewer: user-delegated-project-skill-review
+  reviewed_at: 2026-08-05

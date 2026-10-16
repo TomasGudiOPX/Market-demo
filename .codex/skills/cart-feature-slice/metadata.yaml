@@ -1,0 +1,37 @@
+id: cart-feature-slice
+version: 1.0.1
+scope: project
+status: active
+category: feature
+owners:
+  - architecture
+  - contracts
+  - delivery
+sources:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Working Rules + Validation + Documentation Ownership
+  - path: docs/DESIGN.md
+    revision: 543efb6
+    locator: architecture and module boundaries
+  - path: openspec/specs
+    revision: 6163fc9
+    locator: accepted behavior
+  - path: apps/api/src/modules
+    revision: 543efb6
+    locator: owning module code
+  - path: packages/contracts
+    revision: 543efb6
+    locator: shared schemas
+last_reviewed: 2026-08-06
+risk_level: medium
+approval_required_for:
+  - schema changes
+  - security changes
+  - code review
+generated_by: project-skill-workflow
+generated_at: 2026-08-05
+review:
+  status: approved
+  reviewer: user-delegated-project-skill-review
+  reviewed_at: 2026-08-05

@@ -39,6 +39,7 @@ Razon del mix: TDD brilla donde el comportamiento es nuevo y propenso a regresio
 | QA | `tests/qa-commerce-smoke.mjs` y planes de prueba | Elegi `qa-smoke`/`qa-backend-full-test`/`qa-front-playwright-test` sobre TestSprite segun las skills locales; revise los 12 checks contra `127.0.0.1:18080` |
 | Seguridad | `helmet` + `@nestjs/throttler` | Defini el shape `429` estructurado y el tracker `X-Forwarded-For`; escribi `security.test.ts` primero (TDD) |
 | Product reviews | Contrato Zod, modelo Prisma, modulo NestJS `reviews` y pruebas unitarias | Confirme que consumidor significa cliente autenticado, no verified-purchase; mantuve reviews fuera de `Product` |
+| Ads | Contrato Zod, modelo Prisma, modulo NestJS `ads`, slots UI y pruebas enfocadas | Mantengo ads como dominio separado; la migracion versionada queda pendiente de autorizacion por ruta protegida |
 
 En todos los casos la IA produjo el primer draft; el valor agregado humano fue alcance, validacion de bordes, consistencia de contratos y rechazo de atajos (admin por defecto, `CREATE TABLE IF NOT EXISTS`, pagos externos, perfiles Docker que no existen).
 
@@ -119,6 +120,15 @@ En todos los casos la IA produjo el primer draft; el valor agregado humano fue a
 - **Resultado:** `packages/contracts/src/reviews.ts`, modelo Prisma `Review`, migracion versionada, modulo API `apps/api/src/modules/reviews/` y UI de resenas en detalle de producto.
 - **Correccion/rechazo:** se rechazo embedding de reviews en `productSchema` y verificacion de compra en esta primera iteracion.
 - **Verificacion:** Prisma validate OK; Prisma generate `--no-engine` OK por bloqueo `EPERM` del DLL de engine; contracts build OK; API build OK; API tests OK: 11 archivos, 42 tests; build raiz OK; follow-up UI `yarn workspace @vps-template/web build` OK.
+
+### AI-2026-08-10-01 - Ads module
+
+- **Contexto:** `openspec/changes/add-ads-module` define promociones internas administradas por admin y lecturas publicas por placement.
+- **Objetivo:** implementar contratos, modelo, API, UI, pruebas, smoke y handoffs usando `proj-mono-work`.
+- **Decision workflow:** la ruta protegida `apps/api/prisma/migrations/*` requiere autorizacion explicita; el resto de los cambios de repositorio queda dentro del presupuesto por defecto.
+- **Resultado parcial:** `packages/contracts/src/ads.ts`, esquema Prisma `Ad`, seed deterministico, modulo API `ads`, slots storefront resilientes, admin UI, tests unitarios y smoke ampliado.
+- **Verificacion parcial:** contracts build OK; Prisma generate OK; API build OK; web lint OK; API tests OK: 14 archivos, 52 tests; web build OK; build raiz OK; Compose config OK; OpenSpec validate OK.
+- **Pendiente:** crear la migracion versionada y correr validacion completa/smoke luego de recibir autorizacion.
 
 ## Correcciones o rechazos relevantes
 

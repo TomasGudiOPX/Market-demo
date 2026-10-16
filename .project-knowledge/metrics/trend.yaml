@@ -1,0 +1,46 @@
+trend:
+  - snapshot_date: 2026-08-05
+    scan_run_id: 2026-08-05-proactive-001
+    module_coverage_ratio: 0.0
+    requirement_coverage_ratio: 1.0
+    openspec_vault_linkage_ratio: 0.875
+    undocumented_module_count: 5
+    unrecorded_decision_count: 0
+    orphaned_adr_count: 0
+    contradiction_count: 0
+    stale_count: 0
+    overdue_count: 0
+    fact_count: 0
+    deltas:
+      vs_prior_date: null
+      coverage_delta: 0.0
+      debt_delta: 0
+      staleness_delta: 0
+      contradiction_delta: 0
+      fact_growth: 0
+      promotion_rate: null
+      rejection_rate: null
+  - snapshot_date: 2026-08-05
+    scan_run_id: 2026-08-05-proactive-002
+    module_coverage_ratio: 1.0
+    requirement_coverage_ratio: 1.0
+    openspec_vault_linkage_ratio: 1.0
+    undocumented_module_count: 0
+    unrecorded_decision_count: 0
+    orphaned_adr_count: 0
+    contradiction_count: 8
+    stale_count: 0
+    overdue_count: 0
+    fact_count: 16
+    config_revision: 117f3f7f2c54
+    deltas:
+      vs_prior_date: 2026-08-05
+      coverage_delta: 1.0
+      debt_delta: -5
+      staleness_delta: 0
+      contradiction_delta: 8
+      fact_growth: 16
+      promotion_rate: null
+      rejection_rate: null
+      config_change_breakpoint: true
+      config_diff_note: "Config revision changed from default-template to 117f3f7f2c54 between same-day scans; deltas may reflect measurement repair as well as real coverage."

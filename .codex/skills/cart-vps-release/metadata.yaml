@@ -1,0 +1,33 @@
+id: cart-vps-release
+version: 1.0.0
+scope: project
+status: active
+category: vps-release
+owners:
+  - operations
+  - delivery
+  - security
+sources:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Validation
+  - path: docs/VPS-DOC.md
+    revision: 401f1be
+    locator: deployment and recovery
+  - path: docs/ENVIRONMENTS.md
+    revision: 401f1be
+    locator: environment isolation and rollback
+  - path: docker-compose.yml
+    revision: 7389013
+    locator: deployment topology
+last_reviewed: 2026-08-05
+risk_level: high
+approval_required_for:
+  - pre-deploy review
+  - production deployment
+generated_by: project-skill-workflow
+generated_at: 2026-08-05
+review:
+  status: approved
+  reviewer: user-delegated-project-skill-review
+  reviewed_at: 2026-08-05

@@ -5,6 +5,7 @@ import type { Review } from '@vps-template/contracts/reviews';
 import { request } from '../services/api';
 import type { ToastType } from '../types';
 import { categoryLabel, errorMessage, formatDate, money } from '../utils/formatters';
+import { AdSlot } from './AdSlot';
 
 interface ProductDetailViewProps {
   product: Product | null;
@@ -239,6 +240,8 @@ export function ProductDetailView({
           </button>
         </div>
       </div>
+
+      <AdSlot placement="product_detail" />
 
       <section className="reviews-panel" aria-labelledby="reviews-title">
         <div className="reviews-header">

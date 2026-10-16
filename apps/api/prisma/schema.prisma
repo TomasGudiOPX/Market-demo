@@ -50,8 +50,40 @@ model Product {
   cartItems   CartItem[]
   orderItems  OrderItem[]
   reviews     Review[]
+  ads         Ad[]
 
   @@map("products")
+}
+
+enum AdPlacement {
+  catalog_hero
+  product_detail
+  cart_summary
+  checkout_summary
+  orders_summary
+}
+
+model Ad {
+  id        String      @id @default(uuid()) @db.Uuid
+  title     String      @unique
+  imageUrl  String      @map("image_url")
+  placement AdPlacement
+  targetUrl String?     @map("target_url")
+  productId String?     @map("product_id") @db.Uuid
+  priority  Int         @default(0)
+  isActive  Boolean     @default(true) @map("is_active")
+  startsAt  DateTime?   @map("starts_at")
+  endsAt    DateTime?   @map("ends_at")
+  retiredAt DateTime?   @map("retired_at")
+  createdAt DateTime    @default(now()) @map("created_at")
+  updatedAt DateTime    @updatedAt @map("updated_at")
+  product   Product?    @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@index([placement, isActive, priority])
+  @@index([startsAt])
+  @@index([endsAt])
+  @@index([productId])
+  @@map("ads")
 }
 
 enum OrderStatus {

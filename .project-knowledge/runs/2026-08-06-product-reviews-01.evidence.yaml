@@ -1,0 +1,143 @@
+run_id: 2026-08-06-product-reviews-01
+collected_at: 2026-08-06T00:00:00Z
+sources:
+  - path: apps/api/src/modules/reviews/review.controller.ts
+    revision: "543efb6"
+    locator: "ProductReviewController, ReviewController"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/modules/reviews/review.service.ts
+    revision: "543efb6"
+    locator: "ReviewService"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/modules/reviews/review.types.ts
+    revision: "543efb6"
+    locator: "ReviewRow, toReview"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/modules/reviews/review.repository.ts
+    revision: "543efb6"
+    locator: "ReviewRepository"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/modules/reviews/review.module.ts
+    revision: "543efb6"
+    locator: "ReviewsModule"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/modules/reviews/review.controller.test.ts
+    revision: "543efb6"
+    locator: "Product reviews controller tests"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/modules/reviews/review.service.test.ts
+    revision: "543efb6"
+    locator: "Product reviews service tests"
+    kind: changed-file
+    status: A
+  - path: apps/api/src/app.ts
+    revision: "543efb6"
+    locator: "AppModule.forConfig"
+    kind: changed-file
+    status: M
+  - path: apps/api/prisma/schema.prisma
+    revision: "543efb6"
+    locator: "Review model"
+    kind: changed-file
+    status: M
+  - path: apps/api/prisma/migrations/20260806120000_add_product_reviews/migration.sql
+    revision: "543efb6"
+    locator: "CREATE TABLE reviews"
+    kind: changed-file
+    status: A
+  - path: packages/contracts/src/reviews.ts
+    revision: "543efb6"
+    locator: "reviewSchema, reviewMutationSchema"
+    kind: changed-file
+    status: A
+  - path: packages/contracts/package.json
+    revision: "543efb6"
+    locator: "exports ./reviews"
+    kind: changed-file
+    status: M
+  - path: docs/DESIGN.md
+    revision: "543efb6"
+    locator: "Module Structure, Design Decisions"
+    kind: changed-file
+    status: M
+  - path: docs/obsidian-vault/01 Requisitos/Mapa de Requisitos.md
+    revision: "543efb6"
+    locator: "FR-09 Resenas de productos"
+    kind: changed-file
+    status: M
+  - path: docs/obsidian-vault/01 Requisitos/Requisitos Funcionales.md
+    revision: "543efb6"
+    locator: "FR-09 - Resenas de productos"
+    kind: changed-file
+    status: M
+  - path: docs/obsidian-vault/02 Arquitectura/Modulos de Dominio.md
+    revision: "543efb6"
+    locator: "Reviews section"
+    kind: changed-file
+    status: M
+  - path: docs/obsidian-vault/03 Evidencia/Evidencia - Product Reviews.md
+    revision: "543efb6"
+    locator: "Evidencia - Product Reviews"
+    kind: changed-file
+    status: A
+  - path: docs/obsidian-vault/03 Evidencia/Registro de Evidencia IA.md
+    revision: "543efb6"
+    locator: "AI-2026-08-06-01 - Product reviews"
+    kind: changed-file
+    status: M
+  - path: README.md
+    revision: "543efb6"
+    locator: "API, Modules table"
+    kind: changed-file
+    status: M
+  - path: INFORME_IA.md
+    revision: "543efb6"
+    locator: "AI-2026-08-06-01 - Product reviews"
+    kind: changed-file
+    status: M
+  - path: openspec/changes/add-product-reviews/proposal.md
+    revision: "543efb6"
+    locator: "Add Product Reviews"
+    kind: openspec-change
+    status: A
+  - path: openspec/changes/add-product-reviews/design.md
+    revision: "543efb6"
+    locator: "Add Product Reviews design"
+    kind: openspec-change
+    status: A
+  - path: openspec/changes/add-product-reviews/specs/product-reviews/spec.md
+    revision: "543efb6"
+    locator: "Product Reviews Specification"
+    kind: openspec-change
+    status: A
+  - path: openspec/changes/add-product-reviews/tasks.md
+    revision: "543efb6"
+    locator: "Product reviews tasks"
+    kind: openspec-change
+    status: A
+  - path: AGENT.md
+    revision: "a8d6bbd"
+    locator: "Architecture, Working Rules, Documentation Ownership"
+    kind: owner-doc
+    status: "n/a"
+  - path: docs/DEVELOPMENT.md
+    revision: "401f1be"
+    locator: "Data Changes, Quality Gates"
+    kind: owner-doc
+    status: "n/a"
+  - path: docs/VPS-DOC.md
+    revision: "401f1be"
+    locator: "Backups"
+    kind: owner-doc
+    status: "n/a"
+gaps:
+  - what: "No run record at .project-knowledge/runs/2026-08-06-product-reviews-01.md"
+    reason: "Producer-optional; workflow triggered from approved git diff — no checks[] or user_approvals[] available"
+  - what: "No openspec/specs/product-reviews/ yet"
+    reason: "Change add-product-reviews not yet archived to specs; spec exists only under openspec/changes/"

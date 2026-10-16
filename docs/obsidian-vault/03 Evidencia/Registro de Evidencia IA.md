@@ -180,3 +180,16 @@ Este registro alimenta `INFORME_IA.md`. No registrar actividad que no haya ocurr
 - **Motivo tecnico:** Mantener reviews como modulo separado evita contaminar `Product` con contenido generado por usuarios y conserva el retiro logico del catalogo.
 - **Prueba asociada:** Prisma validate OK; Prisma generate `--no-engine` OK por bloqueo `EPERM` del DLL de engine; contracts build OK; API build OK; API tests OK: 11 archivos, 42 tests; build raiz OK.
 - **Enlaces:** [[03 Evidencia/Evidencia - Product Reviews]], `openspec/changes/add-product-reviews`.
+
+## AI-2026-08-10-01 - Ads module
+
+- **Vertical / requisito:** ads-management, NFR-01, NFR-02, AI-03.
+- **Herramienta o agente:** Codex con `proj-mono-work` y `$openspec-apply-change`.
+- **Objetivo:** Implementar promociones internas administradas por admin y lecturas publicas por placement.
+- **Prompt resumido o enlace:** El usuario pidio aplicar `cart/openspec/changes/add-ads-module` usando `dev-proj-skills/proj-mono-work/proj-mono-work/SKILL.md`.
+- **Salida recibida:** Contrato `@vps-template/contracts/ads`, modelo Prisma `Ad`, modulo API `ads`, UI admin y slots storefront resilientes.
+- **Revision humana:** Pendiente de autorizacion explicita para crear la migracion versionada protegida.
+- **Correccion o rechazo:** No se integro red de anuncios externa, analytics ni cambios de checkout/order.
+- **Motivo tecnico:** Ads tiene lifecycle, schedule, priority y target rules distintos del catalogo; por eso queda fuera de `Product`.
+- **Prueba asociada:** Contracts build OK; Prisma generate OK; API build OK; web lint OK; API tests OK: 14 archivos, 52 tests; web build OK; build raiz OK; Compose config OK; OpenSpec validate OK.
+- **Enlaces:** [[03 Evidencia/Evidencia - Ads Module]], `openspec/changes/add-ads-module`.

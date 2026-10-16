@@ -1,0 +1,20 @@
+candidate_id: 2026-08-05-cart-doc-sync
+collected_at: 2026-08-05
+evidence:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Documentation Ownership
+    summary: Defines which docs own each domain.
+    applies_to_section: [3, 5, 6]
+  - path: .project-knowledge/recommendations/2026-08-05-proactive-002.md
+    revision: working-tree-2026-08-05
+    locator: Critical recommendation queue
+    summary: Lists contradiction-review work that should route through reconcile, not direct doc edits.
+    applies_to_section: [5, 6]
+rules_confirmed:
+  - rule: documentation ownership
+    confirmed: true
+    source: AGENT.md@a8d6bbd
+  - rule: doc-sync does not promote facts directly
+    confirmed: true
+    source: .project-knowledge/accepted@working-tree-2026-08-05

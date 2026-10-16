@@ -1,0 +1,22 @@
+domain: operations
+last_updated: 2026-08-05
+index_revision: working-tree-2026-08-05
+
+facts:
+  - id: operations.deployment-environment-isolation
+    statement: "Local, staging, and production environments share source layout but isolate VPS deployments by checkout or worktree, .env, Compose project name, database credentials, PostgreSQL volume, and loopback port."
+    type: invariant
+    status: accepted
+    scope:
+      kind: environment
+      paths: [openspec/specs/deployment-environments.md]
+    source:
+      - path: openspec/specs/deployment-environments.md
+        revision: working-tree-2026-08-05
+        locator: "VPS Isolation"
+    confidence: explicit
+    owner: operations
+    last_verified: 2026-08-05
+    accepted_by: user-request-cover-remaining-gaps
+    accepted_at: 2026-08-05
+    supersedes: []

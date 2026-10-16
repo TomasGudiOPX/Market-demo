@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Product, ProductCategory } from '@vps-template/contracts/products';
 import { categoryLabel, money, productCategoryOptions } from '../utils/formatters';
+import { AdSlot } from './AdSlot';
 
 type CategoryFilter = ProductCategory | 'all';
 
@@ -62,6 +63,8 @@ export function CatalogView({ products, onSelectProduct, onAddToCart, isBusy }: 
           </p>
         </div>
       </div>
+
+      <AdSlot placement="catalog_hero" onSelectProduct={onSelectProduct} />
 
       <div className="catalog-controls">
         <div className="search-box">

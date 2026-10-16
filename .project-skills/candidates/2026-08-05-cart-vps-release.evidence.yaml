@@ -1,0 +1,20 @@
+candidate_id: 2026-08-05-cart-vps-release
+collected_at: 2026-08-05
+evidence:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Validation
+    summary: Defines Compose as the deployment boundary and validation commands.
+    applies_to_section: [3, 5, 7]
+  - path: docker-compose.yml
+    revision: 7389013
+    locator: deployment topology
+    summary: Compose topology is source of truth for release deployment.
+    applies_to_section: [3, 5]
+rules_confirmed:
+  - rule: only proxy publishes a host port
+    confirmed: true
+    source: AGENT.md@a8d6bbd
+  - rule: staging and production remain isolated
+    confirmed: true
+    source: docs/ENVIRONMENTS.md@401f1be

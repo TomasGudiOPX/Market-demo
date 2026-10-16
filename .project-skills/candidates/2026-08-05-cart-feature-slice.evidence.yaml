@@ -1,0 +1,28 @@
+candidate_id: 2026-08-05-cart-feature-slice
+collected_at: 2026-08-05
+evidence:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Working Rules + Validation + Documentation Ownership
+    summary: Defines module ownership, relative API calls, validation commands, and documentation ownership.
+    applies_to_section: [3, 5, 6, 7]
+  - path: docs/DESIGN.md
+    revision: a8d6bbd
+    locator: architecture and module boundaries
+    summary: Provides architecture and boundary details for feature implementation work.
+    applies_to_section: [3, 5, 6]
+  - path: .project-knowledge/accepted/architecture.yaml
+    revision: working-tree-2026-08-05
+    locator: accepted module ownership facts
+    summary: Auth, products, cart, and orders module ownership has been accepted.
+    applies_to_section: [3, 5]
+rules_confirmed:
+  - rule: module ownership
+    confirmed: true
+    source: AGENT.md@a8d6bbd
+  - rule: shared contracts
+    confirmed: true
+    source: AGENT.md@a8d6bbd
+  - rule: browser API calls remain relative to /api
+    confirmed: true
+    source: AGENT.md@a8d6bbd

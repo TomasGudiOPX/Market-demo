@@ -1,0 +1,89 @@
+skills:
+  - id: cart-feature-slice
+    version: 1.0.1
+    status: active
+    category: feature
+    installed_at: 2026-08-05
+    installed_by: project-skill-install
+    path: .codex/skills/cart-feature-slice/
+    sources_revision_summary:
+      - path: AGENT.md
+        revision: a8d6bbd
+      - path: docs/DESIGN.md
+        revision: 543efb6
+      - path: openspec/specs
+        revision: 6163fc9
+      - path: apps/api/src/modules
+        revision: 543efb6
+      - path: packages/contracts
+        revision: 543efb6
+  - id: cart-data-change
+    version: 1.0.0
+    status: active
+    category: data-change
+    installed_at: 2026-08-05
+    installed_by: project-skill-install
+    path: .codex/skills/cart-data-change/
+    sources_revision_summary:
+      - path: AGENT.md
+        revision: a8d6bbd
+      - path: docs/DEVELOPMENT.md
+        revision: 401f1be
+      - path: apps/api/prisma/schema.prisma
+        revision: 7c3d86d
+      - path: apps/api/prisma/migrations
+        revision: 7c3d86d
+      - path: docs/VPS-DOC.md
+        revision: 401f1be
+      - path: docs/ENVIRONMENTS.md
+        revision: 401f1be
+  - id: cart-mcp-tool
+    version: 1.0.0
+    status: active
+    category: mcp-tool
+    installed_at: 2026-08-05
+    installed_by: project-skill-install
+    path: .codex/skills/cart-mcp-tool/
+    sources_revision_summary:
+      - path: AGENT.md
+        revision: a8d6bbd
+      - path: docs/DESIGN.md
+        revision: a8d6bbd
+      - path: openspec/specs/telegram-db-bridge/spec.md
+        revision: 6163fc9
+      - path: apps/api/src/engine/mcp
+        revision: 6163fc9
+      - path: apps/api/src/modules
+        revision: 6163fc9
+  - id: cart-vps-release
+    version: 1.0.0
+    status: active
+    category: vps-release
+    installed_at: 2026-08-05
+    installed_by: project-skill-install
+    path: .codex/skills/cart-vps-release/
+    sources_revision_summary:
+      - path: AGENT.md
+        revision: a8d6bbd
+      - path: docs/VPS-DOC.md
+        revision: 401f1be
+      - path: docs/ENVIRONMENTS.md
+        revision: 401f1be
+      - path: docker-compose.yml
+        revision: 7389013
+  - id: cart-doc-sync
+    version: 1.0.0
+    status: active
+    category: doc-sync
+    installed_at: 2026-08-05
+    installed_by: project-skill-install
+    path: .codex/skills/cart-doc-sync/
+    sources_revision_summary:
+      - path: AGENT.md
+        revision: a8d6bbd
+      - path: docs
+        revision: 401f1be
+      - path: openspec/specs
+        revision: 6163fc9
+      - path: .project-knowledge/accepted
+        revision: working-tree-2026-08-05

@@ -1,6 +1,7 @@
 import type { Cart } from '@vps-template/contracts/cart';
 import type { View } from '../types';
 import { money } from '../utils/formatters';
+import { AdSlot } from './AdSlot';
 
 interface CheckoutViewProps {
   cart: Cart | null;
@@ -119,6 +120,7 @@ export function CheckoutView({ cart, setView, onCheckout, isBusy }: CheckoutView
               Return to Cart
             </button>
           </div>
+          <AdSlot placement="checkout_summary" />
         </aside>
       </div>
     </section>

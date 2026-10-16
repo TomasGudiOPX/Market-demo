@@ -1,6 +1,7 @@
 /// <reference types="node" />
 
 import { PrismaClient } from '@prisma/client';
+import type { AdPlacement } from '@vps-template/contracts/ads';
 import type { UserRole } from '@vps-template/contracts/auth';
 import type { ProductCategory } from '@vps-template/contracts/products';
 import bcrypt from 'bcryptjs';
@@ -20,6 +21,15 @@ type SeedProduct = {
   priceCents: number;
   imageUrl: string;
   stock: number;
+};
+
+type SeedAd = {
+  title: string;
+  imageUrl: string;
+  placement: AdPlacement;
+  targetProductName?: string;
+  targetUrl?: string;
+  priority: number;
 };
 
 const seedUsers: SeedUser[] = [
@@ -128,6 +138,30 @@ const seedProducts: SeedProduct[] = [
   },
 ];
 
+const seedAds: SeedAd[] = [
+  {
+    title: 'Workspace essentials for calmer desks',
+    imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
+    placement: 'catalog_hero',
+    targetProductName: 'Walnut Desk Organizer',
+    priority: 100,
+  },
+  {
+    title: 'Travel lighter this weekend',
+    imageUrl: 'https://images.unsplash.com/photo-1553531889-e6cf4d692b1b?auto=format&fit=crop&w=1200&q=80',
+    placement: 'product_detail',
+    targetProductName: 'Compression Packing Cubes',
+    priority: 80,
+  },
+  {
+    title: 'Checkout-ready gift ideas',
+    imageUrl: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1200&q=80',
+    placement: 'cart_summary',
+    targetUrl: '/?category=wellness',
+    priority: 60,
+  },
+];
+
 function configuredAdmin(): SeedUser | null {
   const email = process.env.ADMIN_SEED_EMAIL;
   const password = process.env.ADMIN_SEED_PASSWORD;
@@ -159,8 +193,40 @@ async function seedProduct(product: SeedProduct) {
   await prisma.product.create({ data: product });
 }
 
+async function seedAd(ad: SeedAd) {
+  const targetProduct = ad.targetProductName
+    ? await prisma.product.findFirst({ where: { name: ad.targetProductName, isActive: true } })
+    : null;
+
+  await prisma.ad.upsert({
+    where: { title: ad.title },
+    update: {
+      imageUrl: ad.imageUrl,
+      placement: ad.placement,
+      targetUrl: ad.targetUrl ?? null,
+      productId: targetProduct?.id ?? null,
+      priority: ad.priority,
+      isActive: true,
+      startsAt: null,
+      endsAt: null,
+      retiredAt: null,
+    },
+    create: {
+      title: ad.title,
+      imageUrl: ad.imageUrl,
+      placement: ad.placement,
+      targetUrl: ad.targetUrl ?? null,
+      productId: targetProduct?.id ?? null,
+      priority: ad.priority,
+      isActive: true,
+    },
+  });
+}
+
 async function main() {
-  const users = [configuredAdmin(), ...seedUsers].filter((user): user is SeedUser => Boolean(user));
+  // The configured admin (ADMIN_SEED_EMAIL / ADMIN_SEED_PASSWORD) is authoritative:
+  // seed it last so it wins when its email collides with a demo seed user.
+  const users = [...seedUsers, configuredAdmin()].filter((user): user is SeedUser => Boolean(user));
 
   for (const user of users) {
     await seedUser(user);
@@ -168,6 +234,10 @@ async function main() {
 
   for (const product of seedProducts) {
     await seedProduct(product);
+  }
+
+  for (const ad of seedAds) {
+    await seedAd(ad);
   }
 }
 

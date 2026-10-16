@@ -1,0 +1,20 @@
+candidate_id: 2026-08-05-cart-mcp-tool
+collected_at: 2026-08-05
+evidence:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Architecture + Working Rules
+    summary: Defines module service boundaries and MCP token requirements.
+    applies_to_section: [3, 5]
+  - path: openspec/specs/telegram-db-bridge/spec.md
+    revision: 6163fc9
+    locator: accepted MCP bridge behavior
+    summary: Defines authenticated, bounded MCP bridge behavior.
+    applies_to_section: [3, 5, 8]
+rules_confirmed:
+  - rule: MCP calls module services, not database directly
+    confirmed: true
+    source: AGENT.md@a8d6bbd
+  - rule: MCP requires token-controlled access
+    confirmed: true
+    source: openspec/specs/telegram-db-bridge/spec.md@6163fc9

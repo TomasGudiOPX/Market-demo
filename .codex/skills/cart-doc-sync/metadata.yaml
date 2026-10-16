@@ -1,0 +1,36 @@
+id: cart-doc-sync
+version: 1.0.0
+scope: project
+status: active
+category: doc-sync
+owners:
+  - delivery
+  - architecture
+  - operations
+  - contracts
+sources:
+  - path: AGENT.md
+    revision: a8d6bbd
+    locator: Documentation Ownership
+  - path: docs
+    revision: 401f1be
+    locator: documentation set
+  - path: openspec/specs
+    revision: 6163fc9
+    locator: accepted behavior
+  - path: docs/obsidian-vault
+    revision: 401f1be
+    locator: evidence and decisions
+  - path: .project-knowledge/accepted
+    revision: working-tree-2026-08-05
+    locator: accepted facts
+last_reviewed: 2026-08-05
+risk_level: low
+approval_required_for:
+  - documentation review
+generated_by: project-skill-workflow
+generated_at: 2026-08-05
+review:
+  status: approved
+  reviewer: user-delegated-project-skill-review
+  reviewed_at: 2026-08-05
