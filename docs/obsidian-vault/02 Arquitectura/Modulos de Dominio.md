@@ -20,6 +20,14 @@ Posee `Cart` y `CartItem` del usuario autenticado. Sus mutaciones requieren logi
 
 Posee `Order`, `OrderItem` e idempotencia. Mantiene snapshots de precio/cantidad y limita historial al propietario.
 
+## Reviews
+
+Posee `Review` como contenido generado por clientes autenticados. Referencia `Product` y `User`, exige una review por cliente/producto, valida rating entero 1..10 y comentario de hasta 100 caracteres. Las lecturas son publicas solo para productos activos; creacion y actualizacion requieren login y la actualizacion preserva propiedad por usuario.
+
+## Projects
+
+`apps/api/src/modules/projects/` existe como scaffold vacio y no representa un modulo de negocio activo. Los modulos activos documentados son Auth, Products, Cart y Orders.
+
 ## Seguridad API
 
 Capa de transporte del API: `@fastify/helmet` aplica headers de seguridad a cada respuesta y `@nestjs/throttler` con `AppThrottlerGuard` rate-limita por IP respetando `X-Forwarded-For`. El exceso se mapea a HTTP 429 `{ code: 'RATE_LIMITED', message }` via `AppExceptionFilter` para mantener el envelope de errores.
@@ -44,5 +52,6 @@ ESLint flat config y Prettier en la raiz con scripts `lint:eslint`, `format:chec
 - Auth: registro, login y perfil.
 - Carrito: `GET /cart`, `POST /cart/items`, `PATCH /cart/items/:productId`, `DELETE /cart/items/:productId`.
 - Ordenes: `POST /orders/checkout`, `GET /orders`.
+- Reviews: `GET /products/:productId/reviews`, `POST /products/:productId/reviews`, `PATCH /reviews/:reviewId`.
 - Admin: alta, lectura, actualizacion y retiro de productos.
 - Seguridad: headers Helmet y rate limit 429 por IP.

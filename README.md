@@ -21,15 +21,22 @@ The app keeps the pragmatic VPS template shape but implements the evaluation dom
 - Authenticated persistent cart with add, update, and remove.
 - Simulated checkout with required `Idempotency-Key`.
 - Atomic stock decrement, immutable order item snapshots, and order history.
+- Product-detail reviews with public listing and authenticated customer create/update ownership.
+- Supervised action workflow over the MCP endpoint: read-only context tools plus a propose/approve/execute loop with an append-only approval ledger.
 - Swagger/OpenAPI documentation at `/api/docs`.
 
 ## API
 
 - `POST /api/auth/register`, `POST /api/auth/login`, `GET /api/auth/profile`.
 - `GET /api/products`, `GET /api/products/:id`.
+- `GET /api/products/:productId/reviews`, `POST /api/products/:productId/reviews`, `PATCH /api/reviews/:reviewId`.
 - `GET /api/cart`, `POST /api/cart/items`, `PATCH /api/cart/items/:productId`, `DELETE /api/cart/items/:productId`.
 - `POST /api/orders/checkout`, `GET /api/orders`.
 - `POST /api/admin/products`, `PATCH /api/admin/products/:id`, `DELETE /api/admin/products/:id`.
+
+## MCP / Supervised Workflow
+
+The API exposes a Model Context Protocol endpoint at `/mcp` (mounted only when `MCP_API_TOKEN` is set). It provides read-only catalog/order/cart/user/review tools plus a supervised action loop: `propose_action`, `list_actions`, `get_action`, `approve_action`, `reject_action`, `correct_action`, and `get_action_metrics`. Business writes execute only through the executor on an explicit approval. See `docs/VPS-DOC.md` for the exposure and token requirements.
 
 ## Structure
 
@@ -42,7 +49,7 @@ browser -> nginx proxy -> Vite React static app
 | --- | --- |
 | `apps/web/` | Product-facing React storefront, cart, checkout, orders, and admin UI |
 | `apps/api/src/platform/` | Configuration, Prisma, and shared app infrastructure |
-| `apps/api/src/modules/` | Auth, products, cart, and orders modules |
+| `apps/api/src/modules/` | Auth, products, cart, orders, and reviews modules |
 | `packages/contracts/` | Shared schemas and API types |
 | `apps/api/prisma/` | Prisma schema, migrations, and deterministic seed |
 | `openspec/` | Accepted specs and proposed changes |

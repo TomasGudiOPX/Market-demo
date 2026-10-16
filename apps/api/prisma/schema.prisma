@@ -15,13 +15,16 @@ enum UserRole {
 model User {
   id           String   @id @default(uuid()) @db.Uuid
   email        String   @unique
+  externalId   String?  @unique @map("external_id")
   passwordHash String   @map("password_hash")
   role         UserRole @default(customer)
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @updatedAt @map("updated_at")
   cart         Cart?
   orders       Order[]
+  reviews      Review[]
   idempotencyKeys CheckoutIdempotencyKey[]
+  customerNotes CustomerNote[]
 
   @@map("users")
 }
@@ -38,6 +41,7 @@ enum ProductCategory {
 model Product {
   id          String   @id @default(uuid()) @db.Uuid
   name        String
+  sku         String?  @unique
   description String
   category    ProductCategory @default(workspace)
   priceCents  Int      @map("price_cents")
@@ -48,12 +52,21 @@ model Product {
   updatedAt   DateTime @updatedAt @map("updated_at")
   cartItems   CartItem[]
   orderItems  OrderItem[]
+  reviews     Review[]
 
   @@map("products")
 }
 
 enum OrderStatus {
   placed
+}
+
+enum ActionStatus {
+  proposed
+  approved
+  rejected
+  executed
+  failed
 }
 
 model Cart {
@@ -91,6 +104,7 @@ model Order {
   items      OrderItem[]
   createdAt  DateTime    @default(now()) @map("created_at")
   idempotencyKeys CheckoutIdempotencyKey[]
+  customerNotes CustomerNote[]
 
   @@index([userId, createdAt])
   @@map("orders")
@@ -127,4 +141,72 @@ model CheckoutIdempotencyKey {
   @@unique([userId, key])
   @@index([expiresAt])
   @@map("checkout_idempotency_keys")
+}
+
+model Review {
+  id        String   @id @default(uuid()) @db.Uuid
+  productId String   @map("product_id") @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  rating    Int
+  comment   String   @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, userId])
+  @@index([productId, createdAt])
+  @@map("reviews")
+}
+
+model PendingAction {
+  id         String       @id @default(uuid()) @db.Uuid
+  kind       String
+  contextRef String?      @map("context_ref")
+  payload    Json
+  source     String
+  proposedAt DateTime     @default(now()) @map("proposed_at")
+  proposedBy String?      @map("proposed_by")
+  status     ActionStatus @default(proposed)
+  decidedBy  String?      @map("decided_by")
+  decidedAt  DateTime?    @map("decided_at")
+  decision   String?
+  reason     String?
+  resultRef  String?      @map("result_ref")
+  executedAt DateTime?    @map("executed_at")
+  createdAt  DateTime     @default(now()) @map("created_at")
+  updatedAt  DateTime     @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([contextRef])
+  @@map("pending_actions")
+}
+
+model CustomerNote {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @map("user_id") @db.Uuid
+  orderId   String?  @map("order_id") @db.Uuid
+  content   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([orderId])
+  @@map("customer_notes")
+}
+
+model FollowupTask {
+  id         String   @id @default(uuid()) @db.Uuid
+  title      String
+  owner      String
+  dueAt      DateTime @map("due_at")
+  status     String   @default("open")
+  contextRef String?  @map("context_ref")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([contextRef])
+  @@map("followup_tasks")
 }

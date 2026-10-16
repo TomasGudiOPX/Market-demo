@@ -9,12 +9,14 @@ const prisma = new PrismaClient();
 
 type SeedUser = {
   email: string;
+  externalId: string;
   password: string;
   role: UserRole;
 };
 
 type SeedProduct = {
   name: string;
+  sku: string;
   description: string;
   category: ProductCategory;
   priceCents: number;
@@ -23,15 +25,16 @@ type SeedProduct = {
 };
 
 const seedUsers: SeedUser[] = [
-  { email: 'admin@example.com', password: 'admin-password', role: 'admin' },
-  { email: 'manager@example.com', password: 'manager-password', role: 'admin' },
-  { email: 'customer@example.com', password: 'correct-password', role: 'customer' },
-  { email: 'shopper@example.com', password: 'shopper-password', role: 'customer' },
+  { email: 'admin@example.com', externalId: 'admin@example.com', password: 'admin-password', role: 'admin' },
+  { email: 'manager@example.com', externalId: 'manager@example.com', password: 'manager-password', role: 'admin' },
+  { email: 'customer@example.com', externalId: 'customer@example.com', password: 'correct-password', role: 'customer' },
+  { email: 'shopper@example.com', externalId: 'shopper@example.com', password: 'shopper-password', role: 'customer' },
 ];
 
 const seedProducts: SeedProduct[] = [
   {
     name: 'Minimal Desk Lamp',
+    sku: 'MP-WRK-02',
     description: 'Warm adjustable lamp for focused work sessions.',
     category: 'workspace',
     priceCents: 4599,
@@ -40,6 +43,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Walnut Desk Organizer',
+    sku: 'MP-WRK-01',
     description: 'Compact organizer for pens, notes, cables, and small tools.',
     category: 'workspace',
     priceCents: 3299,
@@ -48,6 +52,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Everyday Canvas Tote',
+    sku: 'MP-BAG-01',
     description: 'Durable cotton tote for groceries, books, and commute gear.',
     category: 'bags',
     priceCents: 2499,
@@ -56,6 +61,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Waxed Utility Backpack',
+    sku: 'MP-BAG-02',
     description: 'Weather-resistant pack with padded laptop storage and brass hardware.',
     category: 'bags',
     priceCents: 7899,
@@ -64,6 +70,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Ceramic Coffee Set',
+    sku: 'MP-KIT-01',
     description: 'Two handmade ceramic cups with a matte glaze finish.',
     category: 'kitchen',
     priceCents: 3899,
@@ -72,6 +79,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Glass Pour-Over Carafe',
+    sku: 'MP-KIT-02',
     description: 'Heat-safe glass carafe with a reusable stainless steel filter.',
     category: 'kitchen',
     priceCents: 4299,
@@ -80,6 +88,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Linen Throw Pillow',
+    sku: 'MP-DEC-01',
     description: 'Soft washed linen pillow with a removable feather insert.',
     category: 'decor',
     priceCents: 3499,
@@ -88,6 +97,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Oak Wall Shelf',
+    sku: 'MP-DEC-02',
     description: 'Floating oak shelf for small books, ceramics, and framed prints.',
     category: 'decor',
     priceCents: 5299,
@@ -96,6 +106,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Aromatherapy Diffuser',
+    sku: 'MP-WEL-02',
     description: 'Quiet ceramic diffuser with timed mist settings for evening routines.',
     category: 'wellness',
     priceCents: 5999,
@@ -104,6 +115,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Cork Yoga Block Pair',
+    sku: 'MP-WEL-01',
     description: 'Dense natural cork support blocks for stretching and recovery.',
     category: 'wellness',
     priceCents: 2799,
@@ -112,6 +124,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Compression Packing Cubes',
+    sku: 'MP-TRV-01',
     description: 'Three-piece packing cube set for organized weekend travel.',
     category: 'travel',
     priceCents: 3199,
@@ -120,6 +133,7 @@ const seedProducts: SeedProduct[] = [
   },
   {
     name: 'Insulated Travel Tumbler',
+    sku: 'MP-TRV-02',
     description: 'Leak-resistant tumbler that keeps drinks hot or cold on long commutes.',
     category: 'travel',
     priceCents: 2999,
@@ -132,16 +146,16 @@ function configuredAdmin(): SeedUser | null {
   const email = process.env.ADMIN_SEED_EMAIL;
   const password = process.env.ADMIN_SEED_PASSWORD;
 
-  return email && password ? { email, password, role: 'admin' } : null;
+  return email && password ? { email, externalId: email, password, role: 'admin' } : null;
 }
 
-async function seedUser({ email, password, role }: SeedUser) {
+async function seedUser({ email, password, role, externalId }: SeedUser) {
   const passwordHash = await bcrypt.hash(password, 12);
 
   await prisma.user.upsert({
     where: { email: email.toLowerCase() },
-    update: { passwordHash, role },
-    create: { email: email.toLowerCase(), passwordHash, role },
+    update: { passwordHash, role, externalId },
+    create: { email: email.toLowerCase(), passwordHash, role, externalId },
   });
 }
 

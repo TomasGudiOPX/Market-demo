@@ -19,6 +19,14 @@
     "./orders": {
       "types": "./dist/orders.d.ts",
       "default": "./dist/orders.js"
+    },
+    "./reviews": {
+      "types": "./dist/reviews.d.ts",
+      "default": "./dist/reviews.js"
+    },
+    "./actions": {
+      "types": "./dist/actions.d.ts",
+      "default": "./dist/actions.js"
     }
   },
   "scripts": {
